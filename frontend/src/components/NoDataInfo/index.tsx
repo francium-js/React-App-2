@@ -2,19 +2,19 @@ import { FaDatabase } from 'react-icons/fa'
 
 import type { NoDataInfoProps } from 'src/components/NoDataInfo/types'
 
-import { Container } from 'src/components/NoDataInfo/styles'
+import s from 'src/components/NoDataInfo/styles.module.scss'
 
 const NoDataInfo = ({
-  color = 'white',
+  color = 'gray',
   text,
   leftIcon = <FaDatabase fill={color} />,
   ...props
 }: NoDataInfoProps): JSX.Element => {
   return (
-    <Container {...props} style={{ color }}>
+    <div className={s.container} {...props} style={{ color }}>
       {leftIcon}
       {text}
-    </Container>
+    </div>
   )
 }
 

@@ -7,25 +7,29 @@ import type { SettingCardProps } from 'src/components/SettingCard/types'
 
 import { useSettingCard } from 'src/components/SettingCard/useSettingCard'
 
-import {
-  Container,
-  ButtonContainer,
-  IconWrapper,
-} from 'src/components/SettingCard/styles'
+import s from 'src/components/SettingCard/styles.module.scss'
 
 const SettingCard = ({ onEdit, onDelete, onAdd }: SettingCardProps): JSX.Element => {
   const { vanish, setVanish, settingCardRef } = useSettingCard()
 
   return (
-    <Container ref={settingCardRef} onClick={e => e.stopPropagation()}>
-      <IconWrapper
+    <div
+      className={s.container}
+      ref={settingCardRef}
+      onClick={e => e.stopPropagation()}
+    >
+      <div
+        className={s.iconWrapper}
         onClick={() => {
           setVanish(!vanish)
         }}
       >
         <CiSettings size={28} />
-      </IconWrapper>
-      <ButtonContainer style={{ display: vanish ? 'flex' : 'none' }}>
+      </div>
+      <div
+        className={s.buttonContainer}
+        style={{ display: vanish ? 'flex' : 'none' }}
+      >
         <button
           type="button"
           onClick={() => {
@@ -49,7 +53,7 @@ const SettingCard = ({ onEdit, onDelete, onAdd }: SettingCardProps): JSX.Element
           </button>
         )}
         <button
-          id="deleteButton"
+          className="text-red-600"
           type="button"
           onClick={() => {
             onDelete()
@@ -59,8 +63,8 @@ const SettingCard = ({ onEdit, onDelete, onAdd }: SettingCardProps): JSX.Element
           <FaRegTrashCan size={20} fill="red" />
           Delete
         </button>
-      </ButtonContainer>
-    </Container>
+      </div>
+    </div>
   )
 }
 

@@ -23,7 +23,9 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
   const dispatch = useDispatch<AppDispatch>()
 
   const { isLoading } = useAppSelector(state => state.task)
-  const { data: historyData } = useAppSelector(state => state.history)
+  const { data: historyData, isLoading: historyIsLoading } = useAppSelector(
+    state => state.history,
+  )
 
   const { id, title, dueDate, priority, description, section } = data
 
@@ -32,6 +34,8 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
   }, [])
 
   const filteredData = historyData.filter(item => item?.task?.id === data.id)
+
+  console.log(dateForCalendar(Number(dueDate)))
 
   const {
     control,
@@ -74,6 +78,7 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
 
   return {
     historyData: filteredData,
+    historyIsLoading,
     errors,
     control,
     isLoading,

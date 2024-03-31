@@ -1,12 +1,12 @@
 import type { InputProps } from 'src/components/Input/types'
 
-import { Container } from 'src/components/Input/styles'
+import s from 'src/components/Input/styles.module.scss'
 
 const Input = ({ ...props }: InputProps): JSX.Element => {
   return (
-    <Container>
+    <div className={s.container}>
       <input {...props}></input>
-    </Container>
+    </div>
   )
 }
 

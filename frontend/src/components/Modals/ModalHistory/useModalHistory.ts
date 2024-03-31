@@ -15,5 +15,5 @@ export const useModalHistory = () => {
     dispatch(historyService.getAll())
   }, [])
 
-  return { data, isLoading }
+  return { data, isLoading: isLoading }
 }

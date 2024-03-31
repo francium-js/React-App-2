@@ -3,13 +3,9 @@ import { LuCalendarRange } from 'react-icons/lu'
 
 import type { TaskCardInfoProps } from 'src/components/TaskCardInfo/types'
 
-import { formatDate, spliceName } from 'src/helpers'
+import { formatDate } from 'src/helpers'
 
-import {
-  Container,
-  ParamsContainer,
-  Description,
-} from 'src/components/TaskCardInfo/styles'
+import s from 'src/components/TaskCardInfo/styles.module.scss'
 
 const TaskCardInfo = ({
   title,
@@ -20,10 +16,10 @@ const TaskCardInfo = ({
   ...props
 }: TaskCardInfoProps): JSX.Element => {
   return (
-    <Container {...props}>
-      <h3>{title}</h3>
-      <ParamsContainer>
-        <ul>
+    <div className={s.container} {...props}>
+      <h2>{title}</h2>
+      <div className={s.paramsWrapper}>
+        <ul className={s.paramKey}>
           <li>
             <FiCrosshair size={20} />
             <p>Status :</p>
@@ -37,18 +33,24 @@ const TaskCardInfo = ({
             <p>Priority :</p>
           </li>
         </ul>
-        <ul>
-          <li>{spliceName(status, 15)}</li>
-          <li>{formatDate(dueDate)}</li>
-          <li>{priority}</li>
+        <ul className={s.paramValue}>
+          <li>
+            <p>{status}</p>
+          </li>
+          <li>
+            <p>{formatDate(dueDate)}</p>
+          </li>
+          <li>
+            <p>{priority}</p>
+          </li>
         </ul>
-      </ParamsContainer>
+      </div>
 
-      <Description>
+      <div className={s.descriptionContainer}>
         <h3>Description</h3>
-        <p>{description}</p>
-      </Description>
-    </Container>
+        <p className={'scroll-y'}>{description}</p>
+      </div>
+    </div>
   )
 }
 

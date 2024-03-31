@@ -1,0 +1,102 @@
+.container {
+  @apply flex 
+  flex-col
+  w-96
+  min-h-96
+  gap-y-7;
+
+  @media screen and (max-width: 576px) {
+    @apply w-full;
+  }
+
+  & > h2 {
+    padding: 7px 0px;
+
+    @apply font-bold
+    px-2.5
+    text-xl
+    w-10/12
+    text-wrap
+    break-words;
+  }
+
+  & > p {
+    @apply p-1
+    text-wrap
+    w-9/12
+    text-3xl;
+  }
+}
+
+.paramsWrapper {
+  @apply flex
+    gap-10;
+
+  @media screen and (max-width: 576px) {
+    @apply gap-5;
+  }
+
+  & > ul {
+    @apply flex
+    list-none
+    flex-col 
+    gap-y-2.5;
+
+    & > li {
+      @apply flex
+      text-xl
+      items-center
+      gap-x-2.5;
+
+      @media screen and (max-width: 576px) {
+        @apply text-base;
+      }
+    }
+  }
+}
+
+.paramKey {
+  & p {
+    @apply text-gray-500;
+  }
+}
+
+.paramValue {
+  & p {
+    @apply max-w-52
+        overflow-hidden 
+        whitespace-nowrap
+        text-ellipsis
+      text-black;
+
+    @media screen and (max-width: 576px) {
+      @apply max-w-32;
+    }
+  }
+}
+
+.descriptionContainer {
+  @apply flex 
+    flex-col;
+
+  & > h3 {
+    @apply font-bold
+     text-lg;
+  }
+
+  & > p {
+    @apply h-44
+    w-full
+    p-2
+    text-wrap
+    break-words
+    overflow-y-auto
+    text-xl
+    rounded-md
+    bg-gray-100;
+
+    @media screen and (max-width: 576px) {
+      @apply text-sm;
+    }
+  }
+}

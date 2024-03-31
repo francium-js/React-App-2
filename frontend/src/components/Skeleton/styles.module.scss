@@ -1,0 +1,37 @@
+.loadingContainer {
+  @apply flex
+  items-center
+  justify-center
+  bg-gray-500
+  border-2
+  border-gray-700
+  rounded-xl;
+
+  animation: pulsar 2s linear infinite;
+  @keyframes pulsar {
+    0% {
+      @apply bg-slate-100;
+    }
+    50% {
+      @apply bg-slate-300;
+    }
+    100% {
+      @apply bg-slate-100;
+    }
+  }
+}
+
+.loading {
+  animation: rotateAnimation 2s linear infinite;
+  @keyframes rotateAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(240deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

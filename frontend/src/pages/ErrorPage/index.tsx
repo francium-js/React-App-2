@@ -1,10 +1,10 @@
-import { Container } from 'src/pages/ErrorPage/styles'
+import s from 'src/pages/ErrorPage/styles.module.scss'
 
 const ErrorPage = () => {
   return (
-    <Container>
+    <div className={s.container}>
       <h1>Error 404</h1>
-    </Container>
+    </div>
   )
 }
 

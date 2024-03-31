@@ -1,0 +1,58 @@
+.container {
+  @apply flex
+    relative
+    flex-col
+    m-1.5
+    gap-2.5
+    px-4
+    py-2.5
+    rounded-md
+    cursor-pointer
+    bg-gray-200
+    border-2
+    border-slate-700
+    transition-colors;
+
+  &:hover {
+    @apply bg-gray-300;
+  }
+
+  & > h3 {
+    @apply text-lg 
+    font-medium
+    overflow-hidden 
+    whitespace-nowrap
+    text-ellipsis;
+
+    max-width: 85%;
+  }
+
+  & > p {
+    @apply text-wrap
+    text-sm
+      break-words
+     text-gray-500;
+  }
+}
+
+.dateWrapper {
+  @apply flex 
+    gap-1
+    items-center;
+}
+
+.priorityWrapper {
+  @apply flex
+    gap-1.5
+    py-1
+    px-2.5
+    w-max
+    items-center
+    bg-slate-400
+    rounded-lg;
+}
+
+.settingButtonWrapper {
+  @apply absolute
+    right-2.5;
+}

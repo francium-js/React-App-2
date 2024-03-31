@@ -2,51 +2,53 @@ import type { BoardSectionProps } from 'src/components/BoardSection/types'
 
 import Button from 'src/components/Button'
 import TaskCard from 'src/components/TaskCard'
-import NoDataInfo from 'src/components/NoDataInfo'
+import Skeleton from 'src/components/Skeleton'
 import SettingCard from 'src/components/SettingCard'
-
-import { spliceName } from 'src/helpers'
 
 import { useBoardSection } from 'src/components/BoardSection/useBoardSection'
 
-import {
-  Container,
-  Header,
-  HeaderSetting,
-  TaskWrapper,
-  NoDataInfoWrapper,
-} from 'src/components/BoardSection/styles'
+import s from 'src/components/BoardSection/styles.module.scss'
 
-const BoardSection = ({ sectionId, name }: BoardSectionProps): JSX.Element => {
-  const { openModalNewCard, deleteSection, editSection, data } = useBoardSection(
-    sectionId,
-    name,
-  )
+const BoardSection = ({
+  sectionId,
+  name,
+  refBoard,
+}: BoardSectionProps): JSX.Element => {
+  const {
+    openModalNewCard,
+    deleteSection,
+    editSection,
+    data,
+    isLoading,
+    boardWidth,
+  } = useBoardSection({ sectionId, name, refBoard })
 
   return (
-    <Container>
-      <Header>
-        <h3>{spliceName(name, 15)}</h3>
-        <HeaderSetting>
+    <div className={s.container} style={{ width: boardWidth }}>
+      <div className={s.header}>
+        <h3>{name}</h3>
+        <div className={s.headerSetting}>
           <p>{data.length}</p>
           <SettingCard
             onEdit={editSection}
             onAdd={openModalNewCard}
             onDelete={deleteSection}
           />
-        </HeaderSetting>
-      </Header>
+        </div>
+      </div>
       <Button text="Add new card" onClick={openModalNewCard} />
-      <TaskWrapper>
-        {!data.length ? (
-          <NoDataInfoWrapper>
-            <NoDataInfo text="No card" color="#282c2f" />
-          </NoDataInfoWrapper>
-        ) : (
-          data.map(item => <TaskCard key={item.id} {...item} />)
-        )}
-      </TaskWrapper>
-    </Container>
+      <Skeleton
+        isLoading={isLoading}
+        dataLength={data.length}
+        className={s.skeleton}
+      >
+        <ul className={s.taskList + ' scroll-y'}>
+          {data.map(item => (
+            <TaskCard key={item.id} {...item} />
+          ))}
+        </ul>
+      </Skeleton>
+    </div>
   )
 }
 

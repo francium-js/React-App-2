@@ -6,15 +6,15 @@ import Button from 'src/components/Button'
 import { Modals } from 'src/components/Modals/constants'
 import { userControlPanel } from 'src/components/ControlPanel/useControlPanel'
 
-import { Container, ButtonsWrapper } from 'src/components/ControlPanel/styles'
+import s from 'src/components/ControlPanel/styles.module.scss'
 
 const ControlPanel = (): JSX.Element => {
   const { onOpen } = userControlPanel()
 
   return (
-    <Container>
+    <div className={s.container}>
       <h1>My Task Board</h1>
-      <ButtonsWrapper>
+      <div className={s.buttonsContainer}>
         <Button
           style={{ backgroundColor: 'white', border: 'none' }}
           text="History"
@@ -35,8 +35,8 @@ const ControlPanel = (): JSX.Element => {
             onOpen({ name: Modals.CREATE_NEW_LIST })
           }}
         />
-      </ButtonsWrapper>
-    </Container>
+      </div>
+    </div>
   )
 }
 

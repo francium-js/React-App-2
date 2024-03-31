@@ -1,0 +1,32 @@
+.historyContainer {
+  @apply flex
+    gap-4
+    p-2
+    w-96
+    flex-col
+    overflow-y-auto
+    text-3xl;
+  height: 60vh;
+
+  @media screen and (max-width: 576px) {
+    @apply w-full;
+  }
+}
+
+.skeleton {
+  @apply flex
+  flex-col
+  p-2
+  w-96
+  gap-4;
+
+  height: 60vh;
+
+  & > div {
+    @apply h-20;
+  }
+
+  @media screen and (max-width: 576px) {
+    @apply w-full;
+  }
+}

@@ -22,34 +22,34 @@ const taskSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(taskService.get.fulfilled, (state, { payload }) => {
-        state.data = [...state.data, ...payload]
-        state.isLoading = false
-      })
-      .addCase(taskService.create.fulfilled, (state, { payload }) => {
-        state.data = [...state.data, payload]
-        state.isLoading = false
-        goodToast(`Task "${payload.title}" created`)
-      })
-      .addCase(taskService.patch.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.data = state.data.map(item =>
-          item.id === payload.id ? payload : item,
-        )
-        goodToast(`Task "${payload.title}" appdated`)
-      })
-      .addCase(taskService.remove.fulfilled, (state, { payload }) => {
-        state.data = state.data.filter(item => item.id !== payload.id)
-        state.isLoading = false
-        goodToast(`Task deleted`)
-      })
     addAsyncHandlers(builder, [
       taskService.get,
       taskService.create,
       taskService.patch,
       taskService.remove,
-    ])
+    ]),
+      builder
+        .addCase(taskService.get.fulfilled, (state, { payload }) => {
+          state.data = [...state.data, ...payload]
+          state.isLoading = false
+        })
+        .addCase(taskService.create.fulfilled, (state, { payload }) => {
+          state.data = [...state.data, payload]
+          state.isLoading = false
+          goodToast(`Task "${payload.title}" created`)
+        })
+        .addCase(taskService.patch.fulfilled, (state, { payload }) => {
+          state.data = state.data.map(item =>
+            item.id === payload.id ? payload : item,
+          )
+          state.isLoading = false
+          goodToast(`Task "${payload.title}" appdated`)
+        })
+        .addCase(taskService.remove.fulfilled, (state, { payload }) => {
+          state.data = state.data.filter(item => item.id !== payload.id)
+          state.isLoading = false
+          goodToast(`Task deleted`)
+        })
   },
 })
 

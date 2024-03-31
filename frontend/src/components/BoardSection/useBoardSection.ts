@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import type { AppDispatch } from 'src/redux/store'
+import type { UseBoardSectionProps } from 'src/components/BoardSection/types'
 
 import { useAppSelector } from 'src/redux/store'
 import taskService from 'src/redux/services/task-operations'
@@ -10,11 +11,15 @@ import { useModals } from 'src/contexts/ModalProvider/useModals'
 
 import { Modals } from 'src/components/Modals/constants'
 
-export const useBoardSection = (sectionId: string, status: string) => {
+export const useBoardSection = ({
+  sectionId,
+  name,
+  refBoard,
+}: UseBoardSectionProps) => {
   const { onOpen } = useModals()
   const dispatch = useDispatch<AppDispatch>()
 
-  const { data } = useAppSelector(state => state.task)
+  const { data, isLoading } = useAppSelector(state => state.task)
 
   useEffect(() => {
     if (!data.length) dispatch(taskService.get(sectionId))
@@ -27,12 +32,28 @@ export const useBoardSection = (sectionId: string, status: string) => {
   }
 
   const openModalNewCard = () => {
-    onOpen({ name: Modals.ADD_NEW_CARD, data: { sectionId, status } })
+    onOpen({ name: Modals.ADD_NEW_CARD, data: { sectionId, status: name } })
   }
 
   const deleteSection = () => {
     dispatch(sectionService.remove(sectionId))
   }
 
-  return { openModalNewCard, deleteSection, editSection, onOpen, data: filteredData }
+  const boardWidth = () => {
+    const screenWidth = window.innerWidth
+
+    if (screenWidth > 576) return 288
+
+    return Number(refBoard.current?.offsetWidth) - 40
+  }
+
+  return {
+    openModalNewCard,
+    deleteSection,
+    editSection,
+    onOpen,
+    data: filteredData,
+    boardWidth: boardWidth(),
+    isLoading: isLoading && !data.length,
+  }
 }

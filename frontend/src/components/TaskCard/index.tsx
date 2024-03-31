@@ -7,14 +7,9 @@ import SettingCard from 'src/components/SettingCard'
 
 import { useTaskCard } from 'src/components/TaskCard/useTaskCard'
 
-import { formatDate, spliceName } from 'src/helpers'
+import { formatDate, spliceText } from 'src/helpers'
 
-import {
-  Container,
-  DateWrapper,
-  PriorityWrapper,
-  SettingCardWrapper,
-} from 'src/components/TaskCard/styles'
+import s from 'src/components/TaskCard/styles.module.scss'
 
 const TaskCard = (data: TaskCardProps): JSX.Element => {
   const { deleteSection, openModalEditCard, openInfoTaskModal, priorityColors } =
@@ -23,21 +18,21 @@ const TaskCard = (data: TaskCardProps): JSX.Element => {
   const { title, description, dueDate, priority } = data
 
   return (
-    <Container onClick={openInfoTaskModal}>
-      <SettingCardWrapper>
+    <li className={s.container} onClick={openInfoTaskModal}>
+      <div className={s.settingButtonWrapper}>
         <SettingCard onEdit={openModalEditCard} onDelete={deleteSection} />
-      </SettingCardWrapper>
-      <h3>{spliceName(title, 15)}</h3>
-      <p>{spliceName(description, 50)}</p>
-      <DateWrapper>
+      </div>
+      <h3>{title}</h3>
+      <p>{spliceText(description, 150)}</p>
+      <div className={s.dateWrapper}>
         <LuCalendarRange size={25} />
         <p>{formatDate(dueDate)}</p>
-      </DateWrapper>
-      <PriorityWrapper>
+      </div>
+      <div className={s.priorityWrapper}>
         <FaCircle size={15} fill={priorityColors[priority]} />
         <p>{priority}</p>
-      </PriorityWrapper>
-    </Container>
+      </div>
+    </li>
   )
 }
 

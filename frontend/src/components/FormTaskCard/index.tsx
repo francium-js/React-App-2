@@ -9,16 +9,9 @@ import Input from 'src/components/Input'
 
 import { useFormTaskCard } from 'src/components/FormTaskCard/useFormTaskCard'
 
-import { dateForCalendar, spliceName } from 'src/helpers'
+import { dateForCalendar, spliceText } from 'src/helpers'
 
-import {
-  Container,
-  ItemFormWrapper,
-  Select,
-  TextArea,
-  ParamsContainer,
-  Description,
-} from 'src/components/FormTaskCard/styles'
+import s from 'src/components/FormTaskCard/styles.module.scss'
 
 const FormTaskCard = ({
   errors,
@@ -29,29 +22,28 @@ const FormTaskCard = ({
   const { statusArray } = useFormTaskCard()
 
   return (
-    <Container {...props}>
+    <div className={s.container} {...props}>
       <Controller
         control={control}
         name="title"
         render={({ field: { onChange, onBlur, value } }) => (
-          <ItemFormWrapper>
-            <Input
-              type="text"
-              value={value || ''}
-              onChange={onChange}
-              onBlur={onBlur}
-              placeholder="Task name"
-              style={{
-                border: errors.title && 'solid 2px red',
-                width: '240px',
-                height: '42px',
-              }}
-            />
-          </ItemFormWrapper>
+          <Input
+            type="text"
+            value={value || ''}
+            onChange={onChange}
+            onBlur={onBlur}
+            placeholder="Task name"
+            style={{
+              fontWeight: 700,
+              border: errors.title && 'solid 2px red',
+              maxWidth: '85%',
+              height: '42px',
+            }}
+          />
         )}
       />
-      <ParamsContainer>
-        <ul>
+      <div className={s.paramsWrapper}>
+        <ul className={s.paramsKey}>
           <li>
             <FiCrosshair size={20} />
             <p>Status :</p>
@@ -65,32 +57,30 @@ const FormTaskCard = ({
             <p>Priority :</p>
           </li>
         </ul>
-        <ul>
+        <ul className={s.paramValue}>
           <li>
             {status ? (
-              spliceName(status, 30)
+              <p>{status}</p>
             ) : (
               <Controller
                 control={control}
                 name="sectionId"
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <ItemFormWrapper>
-                    <Select
-                      value={value}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      style={{
-                        fontSize: 15,
-                        border: errors.priority && 'solid 2px red',
-                      }}
-                    >
-                      {statusArray.map(({ id, name }) => (
-                        <option key={id} value={id}>
-                          {spliceName(name, 15)}
-                        </option>
-                      ))}
-                    </Select>
-                  </ItemFormWrapper>
+                  <select
+                    className={s.select}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    style={{
+                      border: errors.priority && 'solid 2px red',
+                    }}
+                  >
+                    {statusArray.map(({ id, name }) => (
+                      <option key={id} value={id}>
+                        {spliceText(name, 25)}
+                      </option>
+                    ))}
+                  </select>
                 )}
               />
             )}
@@ -100,21 +90,18 @@ const FormTaskCard = ({
               control={control}
               name="dueDate"
               render={({ field: { onChange, onBlur, value } }) => (
-                <ItemFormWrapper>
-                  <Input
-                    type="date"
-                    value={value || ''}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    placeholder="Task name"
-                    min={dateForCalendar()}
-                    style={{
-                      fontSize: 15,
-                      padding: '0px 5px',
-                      border: errors.dueDate && 'solid 2px red',
-                    }}
-                  />
-                </ItemFormWrapper>
+                <input
+                  className={s.dueDate}
+                  type="date"
+                  value={value || ''}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  placeholder="Task name"
+                  min={dateForCalendar()}
+                  style={{
+                    border: errors.dueDate && 'solid 2px red',
+                  }}
+                />
               )}
             />
           </li>
@@ -123,46 +110,43 @@ const FormTaskCard = ({
               control={control}
               name="priority"
               render={({ field: { onChange, onBlur, value } }) => (
-                <ItemFormWrapper>
-                  <Select
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    style={{
-                      fontSize: 15,
-                      border: errors.priority && 'solid 2px red',
-                    }}
-                  >
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                  </Select>
-                </ItemFormWrapper>
+                <select
+                  className={s.select}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  style={{
+                    border: errors.priority && 'solid 2px red',
+                  }}
+                >
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
               )}
             />
           </li>
         </ul>
-      </ParamsContainer>
+      </div>
 
-      <Description>
+      <div className={s.descriptionContainer}>
         <h3>Description</h3>
 
         <Controller
           control={control}
           name="description"
           render={({ field: { onChange, onBlur, value } }) => (
-            <ItemFormWrapper>
-              <TextArea
-                value={value || ''}
-                onChange={onChange}
-                onBlur={onBlur}
-                style={{ border: errors.description && 'solid 2px red' }}
-              />
-            </ItemFormWrapper>
+            <textarea
+              className={s.textArea + ' scroll-y'}
+              value={value || ''}
+              onChange={onChange}
+              onBlur={onBlur}
+              style={{ border: errors.description && 'solid 2px red' }}
+            />
           )}
         />
-      </Description>
-    </Container>
+      </div>
+    </div>
   )
 }
 

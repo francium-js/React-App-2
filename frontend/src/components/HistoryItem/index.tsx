@@ -2,7 +2,7 @@ import type { HistoryItemProps } from 'src/components/HistoryItem/types'
 
 import { dateHistoryFormat } from 'src/helpers'
 
-import { Container } from 'src/components/HistoryItem/styles'
+import s from 'src/components/HistoryItem/styles.module.scss'
 
 const HistoryItem = ({
   text,
@@ -10,12 +10,12 @@ const HistoryItem = ({
   ...props
 }: HistoryItemProps): JSX.Element => {
   return (
-    <Container {...props}>
+    <li className={s.container} {...props}>
       {text.map(item => (
         <p key={item}>{item}</p>
       ))}
       <p>{dateHistoryFormat(createdAt)}</p>
-    </Container>
+    </li>
   )
 }
 

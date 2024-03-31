@@ -1,0 +1,122 @@
+.container {
+  @apply flex
+    gap-y-7
+    w-96
+    min-h-96
+    flex-col;
+
+  @media screen and (max-width: 576px) {
+    @apply w-full;
+  }
+}
+
+.select {
+  @apply text-base
+    border-2
+  border-black
+    rounded-md
+    cursor-pointer
+    overflow-hidden 
+    whitespace-nowrap
+    text-ellipsis
+    max-w-36;
+  height: 28px;
+
+  @media screen and (max-width: 576px) {
+    @apply text-sm h-5;
+    height: 24px;
+  }
+}
+
+.dueDate {
+  @apply border-2
+  border-black
+  rounded-md
+  text-base
+  px-1;
+
+  height: 28px;
+
+  @media screen and (max-width: 576px) {
+    @apply text-sm;
+    height: 24px;
+  }
+}
+
+.paramsWrapper {
+  @apply flex
+  gap-10;
+
+  @media screen and (max-width: 576px) {
+    @apply gap-5;
+  }
+
+  & > ul {
+    @apply flex
+    list-none
+    flex-col 
+    gap-y-2.5;
+
+    & > li {
+      @apply flex
+      text-xl
+      items-center
+      gap-x-2.5;
+
+      @media screen and (max-width: 576px) {
+        @apply text-base;
+      }
+    }
+  }
+}
+
+.paramKey {
+  & p {
+    @apply text-gray-500;
+  }
+}
+
+.paramValue {
+  & p {
+    @apply max-w-52
+    text-black
+    overflow-hidden 
+    whitespace-nowrap
+    text-ellipsis;
+
+    @media screen and (max-width: 576px) {
+      @apply max-w-32;
+    }
+  }
+}
+
+.descriptionContainer {
+  @apply flex
+  h-full
+  flex-col
+  gap-2.5;
+
+  & > h3 {
+    @apply font-bold
+     text-lg;
+  }
+
+  & textarea {
+    @apply p-1.5
+   h-44
+    w-full
+    overflow-y-auto
+    text-xl
+    border-2
+    border-black
+    rounded-md
+    resize-none
+    bg-gray-100;
+
+    margin-top: -10px;
+
+    @media screen and (max-width: 576px) {
+      @apply text-sm;
+    }
+  }
+}

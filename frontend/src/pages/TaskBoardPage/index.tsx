@@ -1,28 +1,36 @@
 import BoardSection from 'src/components/BoardSection'
 import ControlPanel from 'src/components/ControlPanel'
-import NoDataInfo from 'src/components/NoDataInfo'
 
 import { useTaskBoardPage } from 'src/pages/TaskBoardPage/useTaskBoardPage'
 
-import { BoardContainer, Container } from 'src/pages/TaskBoardPage/styles'
+import s from 'src/pages/TaskBoardPage/styles.module.scss'
+import Skeleton from 'src/components/Skeleton'
 
 const TaskBoard = (): JSX.Element => {
-  const { data } = useTaskBoardPage()
-  console.log(data)
+  const { data, isLoading, refBoard } = useTaskBoardPage()
 
   return (
-    <Container>
+    <div ref={refBoard} className={s.container}>
       <ControlPanel />
-      {!data.length ? (
-        <NoDataInfo text="No sections, please create new list" />
-      ) : (
-        <BoardContainer>
+      <Skeleton
+        className={s.skeleton}
+        skeletonLength={1}
+        size={100}
+        isLoading={isLoading}
+        dataLength={data.length}
+      >
+        <ul className={s.boardList + ' board-scroll-y'}>
           {data.map(item => (
-            <BoardSection key={item.id} sectionId={item.id} name={item.name} />
+            <BoardSection
+              key={item.id}
+              sectionId={item.id}
+              name={item.name}
+              refBoard={refBoard}
+            />
           ))}
-        </BoardContainer>
-      )}
-    </Container>
+        </ul>
+      </Skeleton>
+    </div>
   )
 }
 

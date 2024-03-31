@@ -1,0 +1,58 @@
+.container {
+  @apply relative;
+}
+
+.buttonContainer {
+  @apply absolute
+  flex
+  z-50
+  flex-col
+  w-max
+  p-1.5
+  gap-2.5
+  border
+  border-gray-700
+  bg-slate-100
+    rounded-lg;
+
+  translate: -100% -20%;
+
+  & > button {
+    @apply flex 
+    gap-2.5
+    justify-start
+    items-center
+    py-1
+    px-2.5
+    border-none
+    rounded-md
+    text-lg
+    font-medium
+    bg-gray-300
+    transition-colors
+    cursor-pointer;
+
+    &:hover {
+      @apply bg-gray-400;
+    }
+  }
+}
+
+.iconWrapper {
+  @apply flex
+    w-max
+    h-max
+    cursor-pointer;
+
+  &:hover {
+    animation: rotateAnimation 2s linear infinite;
+    @keyframes rotateAnimation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

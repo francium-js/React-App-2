@@ -1,0 +1,10 @@
+.container {
+  & > input {
+    @apply w-full
+        p-2
+        text-xl
+        border-2
+        border-black
+        rounded-md;
+  }
+}

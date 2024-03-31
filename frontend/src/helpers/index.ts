@@ -53,7 +53,7 @@ export const dateToMilliseconds = (value: string) => {
   return milliseconds
 }
 
-export const spliceName = (value: string, howMuch: number) => {
+export const spliceText = (value: string, howMuch: number) => {
   return value.length > howMuch ? `${value.slice(0, howMuch)}...` : value
 }
 

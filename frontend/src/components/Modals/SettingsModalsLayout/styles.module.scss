@@ -1,0 +1,89 @@
+.container {
+  @apply flex
+  absolute
+    top-0
+    left-0
+    w-screen
+    h-screen
+    items-center
+    justify-center
+    px-5;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  & > div {
+    @apply flex
+    relative
+    pb-5
+    mt-5
+    gap-5
+    flex-col
+    bg-white
+    overflow-hidden
+    rounded-2xl;
+
+    -webkit-box-shadow:
+      inset 0px 0px 0px 4px rgb(48, 64, 110),
+      inset 0px 0px 12px 6px rgba(0, 0, 0, 0.9);
+    -moz-box-shadow:
+      inset 0px 0px 0px 4px rgb(48, 64, 110),
+      inset 0px 0px 12px 6px rgba(0, 0, 0, 0.9);
+    box-shadow:
+      inset 0px 0px 0px 4px rgb(48, 64, 110),
+      inset 0px 0px 12px 6px rgba(0, 0, 0, 0.9);
+
+    @media screen and (max-width: 576px) {
+      @apply w-full;
+    }
+  }
+}
+
+.header {
+  @apply flex
+  text-xl
+  h-10
+  items-center
+  bg-midnight;
+
+  & > h3 {
+    @apply text-white
+    font-light
+    ml-5;
+  }
+}
+
+.buttonConfirm_Wrapper {
+  @apply mx-auto;
+
+  & > button {
+    @apply flex
+    items-center
+    gap-2.5
+    py-1
+    px-5
+    text-xl
+    rounded-md
+    border-2
+    border-black
+    bg-gray-200
+    transition-transform
+    cursor-pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.buttonClose {
+  @apply absolute
+  right-2.5
+  top-1.5
+  fill-white
+  transition-transform
+  cursor-pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

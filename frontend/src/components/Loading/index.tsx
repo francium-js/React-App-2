@@ -1,15 +1,15 @@
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-import { Container, IconWrapper } from 'src/components/Loading/styles'
+import s from 'src/components/Loading/styles.module.scss'
 
 const Loading = (): JSX.Element => {
   return (
-    <Container>
-      <IconWrapper>
+    <div className={s.container}>
+      <div className={s.iconWrapper}>
         <AiOutlineLoading3Quarters fill="white" size={40} />
-      </IconWrapper>
+      </div>
       Loading...
-    </Container>
+    </div>
   )
 }
 

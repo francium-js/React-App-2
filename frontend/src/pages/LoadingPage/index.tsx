@@ -1,10 +1,10 @@
-import { Container } from 'src/pages/LoadingPage/styles'
+import s from 'src/pages/LoadingPage/styles.module.scss'
 
 const LoadingPage = () => {
   return (
-    <Container>
+    <div className={s.container}>
       <h1>Loading...</h1>
-    </Container>
+    </div>
   )
 }
 

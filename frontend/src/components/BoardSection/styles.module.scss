@@ -1,0 +1,62 @@
+.container {
+  @apply flex
+    gap-2.5
+    h-max
+    p-1
+    flex-col
+    border-4
+    border-gray-500
+    rounded-lg
+    bg-white;
+
+  max-height: 95%;
+}
+
+.header {
+  @apply flex
+    p-1
+    justify-between
+    items-center
+    border-b-2
+    border-gray-500;
+
+  & > h3 {
+    @apply text-xl 
+    font-medium 
+    overflow-hidden 
+    whitespace-nowrap
+    text-ellipsis;
+
+    max-width: 75%;
+  }
+}
+
+.headerSetting {
+  @apply flex
+    gap-2.5
+    items-center;
+
+  & > p {
+    @apply text-xl 
+    font-medium;
+  }
+}
+
+.taskList {
+  @apply flex
+    gap-2.5
+    flex-col
+    overflow-y-auto;
+}
+
+.skeleton {
+  @apply flex 
+  gap-2.5
+  flex-col
+  overflow-y-auto;
+
+  & > div {
+    @apply mx-1
+    min-h-40;
+  }
+}

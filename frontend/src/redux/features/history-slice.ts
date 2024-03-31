@@ -20,16 +20,16 @@ const historySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(historyService.getById.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.data = payload
-      })
-      .addCase(historyService.getAll.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.data = payload
-      })
-    addAsyncHandlers(builder, [historyService.getById, historyService.getAll])
+    addAsyncHandlers(builder, [historyService.getById, historyService.getAll]),
+      builder
+        .addCase(historyService.getById.fulfilled, (state, { payload }) => {
+          state.data = payload
+          state.isLoading = false
+        })
+        .addCase(historyService.getAll.fulfilled, (state, { payload }) => {
+          state.data = payload
+          state.isLoading = false
+        })
   },
 })
 

@@ -2,7 +2,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 
 import type { ButtonProps } from 'src/components/Button/types'
 
-import { StyledButton } from 'src/components/Button/styles'
+import s from 'src/components/Button/styles.module.scss'
 
 const Button = ({
   leftIcon = <AiOutlinePlus />,
@@ -11,10 +11,10 @@ const Button = ({
   ...props
 }: ButtonProps): JSX.Element => {
   return (
-    <StyledButton type={type} {...props}>
+    <button className={s.button} type={type} {...props}>
       {leftIcon}
       {text}
-    </StyledButton>
+    </button>
   )
 }
 

@@ -4,19 +4,14 @@ import { GiConfirmed } from 'react-icons/gi'
 import type { ModalTaskInfoProps } from 'src/components/Modals/ModalTaskInfo/types'
 
 import SettingsModalsLayout from 'src/components/Modals/SettingsModalsLayout'
+import FormTaskCard from 'src/components/FormTaskCard'
 import TaskCardInfo from 'src/components/TaskCardInfo'
 import HistoryItem from 'src/components/HistoryItem'
-import NoDataInfo from 'src/components/NoDataInfo'
-import FormTaskCard from 'src/components/FormTaskCard'
+import Skeleton from 'src/components/Skeleton'
 
 import { useModalTaskInfo } from 'src/components/Modals/ModalTaskInfo/useModalTaskInfo'
 
-import {
-  Container,
-  TaskHistory,
-  EditButtonWrapper,
-  CardFormWrapper,
-} from 'src/components/Modals/ModalTaskInfo/styles'
+import s from 'src/components/Modals/ModalTaskInfo/styles.module.scss'
 
 const ModalTaskInfo = ({
   isOpen,
@@ -25,6 +20,7 @@ const ModalTaskInfo = ({
 }: ModalTaskInfoProps): JSX.Element => {
   const {
     historyData,
+    historyIsLoading,
     errors,
     control,
     isLoading,
@@ -41,46 +37,49 @@ const ModalTaskInfo = ({
       closeModal={closeModal}
       Button={<></>}
     >
-      <Container>
-        {
-          <CardFormWrapper>
+      <div className={s.container}>
+        <div className={s.cardFormWrapper}>
+          {isEditor ? (
+            <FormTaskCard errors={errors} control={control} />
+          ) : (
+            <TaskCardInfo {...data} />
+          )}
+
+          <div className={s.editButtonWrapper}>
             {isEditor ? (
-              <FormTaskCard errors={errors} control={control} />
+              <button
+                style={{
+                  backgroundColor: !isDirty || isLoading ? '#f32d2d' : '#3bdf43',
+                }}
+                disabled={isLoading}
+                onClick={onConfirm}
+              >
+                <GiConfirmed size={30} />
+              </button>
             ) : (
-              <TaskCardInfo {...data} />
+              <button onClick={() => useIsEditor(true)}>
+                <FiEdit size={30} />
+              </button>
             )}
+          </div>
+        </div>
 
-            <EditButtonWrapper>
-              {isEditor ? (
-                <button
-                  style={{
-                    backgroundColor: !isDirty || isLoading ? '#d80d0d' : '#47b94d',
-                  }}
-                  disabled={isLoading}
-                  onClick={onConfirm}
-                >
-                  <GiConfirmed size={30} />
-                </button>
-              ) : (
-                <button onClick={() => useIsEditor(true)}>
-                  <FiEdit size={30} />
-                </button>
-              )}
-            </EditButtonWrapper>
-          </CardFormWrapper>
-        }
-
-        <TaskHistory>
+        <div className={s.historyContainer}>
           <h3>Activity</h3>
-          <ul>
-            {!historyData.length ? (
-              <NoDataInfo color="#282c2f" text="No history" />
-            ) : (
-              historyData.map(item => <HistoryItem {...item} key={item.id} />)
-            )}
-          </ul>
-        </TaskHistory>
-      </Container>
+          <Skeleton
+            className={s.skeleton}
+            isLoading={historyIsLoading}
+            dataLength={historyData.length}
+            size={32}
+          >
+            <ul className={'scroll-y'}>
+              {historyData.map(item => (
+                <HistoryItem {...item} key={item.id} />
+              ))}
+            </ul>
+          </Skeleton>
+        </div>
+      </div>
     </SettingsModalsLayout>
   )
 }
