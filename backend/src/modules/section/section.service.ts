@@ -4,38 +4,71 @@ import { Repository } from 'typeorm'
 
 import { Section } from 'src/entities/section.entity'
 
-import { SectionResponseDto } from 'src/shared/dtos/section-response.dto'
+import { HistoryService } from '../history/history.service'
+
+import { GetSectionIdResponseDto } from './dtos/get-id.dto'
+import { PostSectionResponseDto } from './dtos/post.dto'
 
 @Injectable()
 export class SectionService {
   constructor(
     @InjectRepository(Section)
     private readonly sectionRepository: Repository<Section>,
+    private readonly historyService: HistoryService,
   ) {}
 
-  async get(): Promise<SectionResponseDto[]> {
-    return this.sectionRepository.find()
-  }
-
-  async create(name: string): Promise<SectionResponseDto> {
-    return this.sectionRepository.save({
+  async create(name: string): Promise<PostSectionResponseDto> {
+    const createdSection = await this.sectionRepository.save({
       name,
     })
+
+    this.historyService.createSectionHistory(createdSection, [
+      `Section "${createdSection.name}" created`,
+    ])
+
+    return createdSection
   }
 
   async patch(id: string, name: string): Promise<void> {
-    const section = await this.sectionRepository.update({ id: id }, { name })
+    const section = await this.sectionRepository.findOne({
+      where: { id },
+    })
 
-    if (section.affected === 0) {
-      throw new HttpException(`Task with id ${id} not found`, HttpStatus.NOT_FOUND)
+    if (!section) {
+      throw new HttpException(
+        `Section with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      )
     }
+
+    await this.sectionRepository.update({ id: id }, { name })
+    await this.historyService.createSectionHistory(section, [
+      `Section "${name}" renamed to ${section.name}`,
+    ])
   }
 
-  async delete(id: string): Promise<void> {
-    const deleteResult = await this.sectionRepository.delete(id)
+  async getById(id: string): Promise<GetSectionIdResponseDto> {
+    return this.sectionRepository.findOne({
+      where: { id },
+      relations: ['tasks'],
+    })
+  }
 
-    if (deleteResult.affected === 0) {
-      throw new HttpException(`Task with id ${id} not found`, HttpStatus.NOT_FOUND)
+  async deleteById(id: string): Promise<void> {
+    const section = await this.sectionRepository.findOne({
+      where: { id },
+    })
+
+    if (!section) {
+      throw new HttpException(
+        `Section with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      )
     }
+
+    await this.sectionRepository.delete(id)
+    await this.historyService.createSectionHistory(section, [
+      `Section "${section.name}" deleted`,
+    ])
   }
 }

@@ -3,9 +3,8 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { HistoryService } from './history.service'
 
-import { IdParamDto } from 'src/shared/dtos/id-param.dto'
-
-import { History } from 'src/entities/history.entity'
+import { GetHistoryResponseDto } from './dtos/get.dto'
+import { GetHistoryIdParamsDto, GetHistoryIdResponseDto } from './dtos/get-id.dto'
 
 @Controller('/history')
 @ApiTags('Task history')
@@ -16,9 +15,9 @@ export class HistoryController {
   @ApiOperation({ summary: 'Get all history' })
   @ApiResponse({
     status: 200,
-    type: [History],
+    type: [GetHistoryResponseDto],
   })
-  async getAll(): Promise<History[]> {
+  async getAll(): Promise<GetHistoryResponseDto[]> {
     return this.historyService.get()
   }
 
@@ -26,9 +25,11 @@ export class HistoryController {
   @ApiOperation({ summary: 'Get task history' })
   @ApiResponse({
     status: 200,
-    type: [History],
+    type: [GetHistoryIdResponseDto],
   })
-  async getById(@Param() { id }: IdParamDto): Promise<History[]> {
-    return this.historyService.getById(id)
+  async getById(
+    @Param() { id }: GetHistoryIdParamsDto,
+  ): Promise<GetHistoryIdResponseDto[]> {
+    return this.historyService.getByTaskId(id)
   }
 }

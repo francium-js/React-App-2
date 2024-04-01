@@ -1,7 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger'
 import { IsIn, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
 
-export class CreateBodyDto {
+export class PostBodyDto {
   @IsNotEmpty()
   @IsString()
   @IsUUID()
@@ -31,4 +31,24 @@ export class CreateBodyDto {
       'Task description should be unambuguration accurate, factual, comprehensible.',
   })
   description: string
+}
+
+export class PostResponseDto {
+  @ApiProperty({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' })
+  id: string
+
+  @ApiProperty({ example: 'To do' })
+  status: string
+
+  @ApiProperty({ example: 'Task name' })
+  title: string
+
+  @ApiProperty({ example: 'Task description...' })
+  description: string
+
+  @ApiProperty({ example: 1434234532643644 })
+  dueDate: number
+
+  @ApiProperty({ example: 'Low' })
+  priority: string
 }

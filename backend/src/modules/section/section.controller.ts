@@ -3,34 +3,28 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { SectionService } from './section.service'
 
-import { PostBodyDto } from './dtos/post-body.dto'
-import { PatchBodyDto } from './dtos/patch-body.dto'
-
-import { SectionResponseDto } from 'src/shared/dtos/section-response.dto'
-import { IdParamDto } from 'src/shared/dtos/id-param.dto'
+import { GetSectionIdParamsDto, GetSectionIdResponseDto } from './dtos/get-id.dto'
+import { PostSectionBodyDto, PostSectionResponseDto } from './dtos/post.dto'
+import { PatchSectionBodyDto, PatchSectionResponseDto } from './dtos/patch.dto'
+import {
+  DeleteSectionIdParamsDto,
+  DeleteSectionIdResponseDto,
+} from './dtos/delete-id.dto'
 
 @Controller('/section')
-@ApiTags('Board section')
+@ApiTags('section')
 export class SectionController {
   constructor(private readonly sectionService: SectionService) {}
-
-  @Get()
-  @ApiOperation({ summary: 'Get all sections' })
-  @ApiResponse({
-    status: 200,
-    type: SectionResponseDto,
-  })
-  async get(): Promise<SectionResponseDto[]> {
-    return this.sectionService.get()
-  }
 
   @Post()
   @ApiOperation({ summary: 'Create board section' })
   @ApiResponse({
     status: 200,
-    type: SectionResponseDto,
+    type: PostSectionResponseDto,
   })
-  async create(@Body() { name }: PostBodyDto): Promise<SectionResponseDto> {
+  async create(
+    @Body() { name }: PostSectionBodyDto,
+  ): Promise<PostSectionResponseDto> {
     return this.sectionService.create(name)
   }
 
@@ -38,22 +32,38 @@ export class SectionController {
   @ApiOperation({ summary: 'Patch board section' })
   @ApiResponse({
     status: 200,
-    type: SectionResponseDto,
+    type: PatchSectionResponseDto,
   })
-  async patch(@Body() { id, name }: PatchBodyDto): Promise<PatchBodyDto> {
+  async patch(
+    @Body() { id, name }: PatchSectionBodyDto,
+  ): Promise<PatchSectionResponseDto> {
     await this.sectionService.patch(id, name)
 
     return { id, name }
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get all sections' })
+  @ApiResponse({
+    status: 200,
+    type: [GetSectionIdResponseDto],
+  })
+  async get(
+    @Param() { id }: GetSectionIdParamsDto,
+  ): Promise<GetSectionIdResponseDto> {
+    return this.sectionService.getById(id)
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete board section' })
   @ApiResponse({
     status: 200,
-    type: IdParamDto,
+    type: DeleteSectionIdResponseDto,
   })
-  async delete(@Param() { id }: IdParamDto): Promise<IdParamDto> {
-    await this.sectionService.delete(id)
+  async delete(
+    @Param() { id }: DeleteSectionIdParamsDto,
+  ): Promise<DeleteSectionIdResponseDto> {
+    await this.sectionService.deleteById(id)
 
     return { id }
   }

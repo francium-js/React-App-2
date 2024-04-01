@@ -1,20 +1,31 @@
-import { ApiProperty } from '@nestjs/swagger'
-
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 
 import { Task } from './task.entity'
+import { Board } from './board.entity'
+import { History } from './history.entity'
 
 @Entity()
 export class Section {
   @PrimaryGeneratedColumn('uuid')
-  @ApiProperty({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' })
   id: string
 
   @Column()
-  @ApiProperty({ example: 'To do' })
   name: string
 
   @OneToMany(() => Task, task => task.section, { onDelete: 'CASCADE' })
-  @ApiProperty({ type: () => [Task] })
   tasks: Task[]
+
+  @OneToMany(() => History, history => history.section)
+  history: History[]
+
+  @JoinColumn({ name: 'board_id', referencedColumnName: 'id' })
+  @ManyToOne(() => Board, board => board.sections, { onDelete: 'CASCADE' })
+  board: Board
 }

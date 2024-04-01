@@ -3,12 +3,10 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { TaskService } from './task.service'
 
-import { CreateBodyDto } from './dtos/create-body.dto'
-import { PatchBodyDto } from './dtos/patch-body-dto'
-import { CreateBodyResponseDto } from './dtos/create-body-response.dto'
-
-import { IdParamDto } from 'src/shared/dtos/id-param.dto'
-import { Task } from 'src/entities/task.entity'
+import { PostBodyDto, PostResponseDto } from './dtos/post.dto'
+import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch-dto'
+import { GetTaskIdParamsDto, GetTaskIdResponseDto } from './dtos/get-id.dto'
+import { DeleteTaskIdParamsDto, DeleteTaskResponseDto } from './dtos/delete-id.dto'
 
 @Controller('/task')
 @ApiTags('Task')
@@ -19,9 +17,9 @@ export class TaskController {
   @ApiOperation({ summary: 'Create task' })
   @ApiResponse({
     status: 200,
-    type: CreateBodyResponseDto,
+    type: PostResponseDto,
   })
-  async create(@Body() data: CreateBodyDto): Promise<CreateBodyResponseDto> {
+  async create(@Body() data: PostBodyDto): Promise<PostResponseDto> {
     return this.taskService.create(data)
   }
 
@@ -29,9 +27,9 @@ export class TaskController {
   @ApiOperation({ summary: 'Patch task' })
   @ApiResponse({
     status: 200,
-    type: Task,
+    type: PatchTaskResponseDto,
   })
-  async patch(@Body() data: PatchBodyDto): Promise<Task> {
+  async patch(@Body() data: PatchTaskBodyDto): Promise<PatchTaskResponseDto> {
     return this.taskService.patch(data)
   }
 
@@ -39,9 +37,9 @@ export class TaskController {
   @ApiOperation({ summary: 'Get all tasks from section' })
   @ApiResponse({
     status: 200,
-    type: [Task],
+    type: [GetTaskIdResponseDto],
   })
-  async get(@Param() { id }: IdParamDto): Promise<Task[]> {
+  async get(@Param() { id }: GetTaskIdParamsDto): Promise<GetTaskIdResponseDto[]> {
     const result = await this.taskService.get(id)
 
     return result
@@ -51,10 +49,12 @@ export class TaskController {
   @ApiOperation({ summary: 'Delete task' })
   @ApiResponse({
     status: 200,
-    type: IdParamDto,
+    type: DeleteTaskResponseDto,
   })
-  async delete(@Param() { id }: IdParamDto): Promise<IdParamDto> {
-    await this.taskService.delete(id)
+  async delete(
+    @Param() { id }: DeleteTaskIdParamsDto,
+  ): Promise<DeleteTaskResponseDto> {
+    await this.taskService.deleteById(id)
 
     return { id }
   }

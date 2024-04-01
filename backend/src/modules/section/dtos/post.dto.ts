@@ -1,15 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator'
+import { IsNotEmpty, IsString } from 'class-validator'
 
-export class PatchBodyDto {
+export class PostSectionBodyDto {
   @IsNotEmpty()
   @IsString()
-  @IsUUID()
+  @ApiProperty({ example: 'To do' })
+  name: string
+}
+
+export class PostSectionResponseDto {
   @ApiProperty({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' })
   id: string
 
-  @IsNotEmpty()
-  @IsString()
   @ApiProperty({ example: 'To do' })
   name: string
 }

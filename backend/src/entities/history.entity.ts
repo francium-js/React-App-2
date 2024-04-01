@@ -1,5 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger'
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,26 +7,32 @@ import {
   BeforeInsert,
 } from 'typeorm'
 
+import { Board } from './board.entity'
 import { Task } from './task.entity'
+import { Section } from './section.entity'
 
 @Entity()
 export class History {
   @PrimaryGeneratedColumn('uuid')
-  @ApiProperty({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' })
   id: string
 
   @Column({ type: 'text', array: true })
-  @ApiProperty({ example: ['Tack created'] })
   text: string[]
 
   @Column({ type: 'bigint' })
-  @ApiProperty({ example: 1434234532643644 })
   createdAt: number
 
   @ManyToOne(() => Task, task => task.history, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'history_id' })
-  @ApiProperty({ type: () => Task })
+  @JoinColumn({ name: 'task_id' })
   task: Task
+
+  @ManyToOne(() => Section, section => section.history, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'section_id' })
+  section: Section
+
+  @ManyToOne(() => Board, board => board.history, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'board_id' })
+  board: Board
 
   @BeforeInsert()
   setCreatedAt() {
