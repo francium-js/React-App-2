@@ -17,19 +17,19 @@ export class SectionController {
   constructor(private readonly sectionService: SectionService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create board section' })
+  @ApiOperation({ summary: 'Create new section' })
   @ApiResponse({
     status: 200,
     type: PostSectionResponseDto,
   })
   async create(
-    @Body() { name }: PostSectionBodyDto,
+    @Body() { name, boardId }: PostSectionBodyDto,
   ): Promise<PostSectionResponseDto> {
-    return this.sectionService.create(name)
+    return this.sectionService.create(boardId, name)
   }
 
   @Patch()
-  @ApiOperation({ summary: 'Patch board section' })
+  @ApiOperation({ summary: 'Patch section' })
   @ApiResponse({
     status: 200,
     type: PatchSectionResponseDto,
@@ -43,19 +43,19 @@ export class SectionController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get all sections' })
+  @ApiOperation({ summary: 'Get sections from board' })
   @ApiResponse({
     status: 200,
     type: [GetSectionIdResponseDto],
   })
   async get(
     @Param() { id }: GetSectionIdParamsDto,
-  ): Promise<GetSectionIdResponseDto> {
+  ): Promise<GetSectionIdResponseDto[]> {
     return this.sectionService.getById(id)
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete board section' })
+  @ApiOperation({ summary: 'Delete section' })
   @ApiResponse({
     status: 200,
     type: DeleteSectionIdResponseDto,

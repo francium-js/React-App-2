@@ -18,6 +18,13 @@ exports.PostSectionBodyDto = PostSectionBodyDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' }),
+    __metadata("design:type", String)
+], PostSectionBodyDto.prototype, "boardId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     (0, swagger_1.ApiProperty)({ example: 'To do' }),
     __metadata("design:type", String)
 ], PostSectionBodyDto.prototype, "name", void 0);

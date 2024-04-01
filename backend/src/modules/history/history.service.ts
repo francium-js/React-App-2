@@ -3,11 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 import { History } from 'src/entities/history.entity'
-import { Section } from 'src/entities/section.entity'
+import { Board } from 'src/entities/board.entity'
 import { Task } from 'src/entities/task.entity'
 
 import { GetHistoryResponseDto } from './dtos/get.dto'
 import { GetHistoryIdResponseDto } from './dtos/get-id.dto'
+import { CreateHistoryT } from './types'
 
 @Injectable()
 export class HistoryService {
@@ -16,12 +17,21 @@ export class HistoryService {
     private readonly historyRepository: Repository<History>,
     @InjectRepository(Task)
     private readonly taskRepository: Repository<Task>,
+    @InjectRepository(Board)
+    private readonly boardRepository: Repository<Board>,
   ) {}
 
-  async get(): Promise<GetHistoryResponseDto[]> {
-    return this.historyRepository.find({
-      relations: ['task'],
+  async get(id: string): Promise<GetHistoryResponseDto[]> {
+    const board = await this.boardRepository.findOne({
+      where: { id },
+      relations: ['history'],
     })
+
+    if (!board) {
+      throw new HttpException(`Board with ${id} not found`, HttpStatus.NOT_FOUND)
+    }
+
+    return board.history
   }
 
   async getByTaskId(id: string): Promise<GetHistoryIdResponseDto[]> {
@@ -37,18 +47,11 @@ export class HistoryService {
     return task.history
   }
 
-  async createTaskHistory(task: Task, text: string[]): Promise<History> {
+  async createHistory({ board, task, text }: CreateHistoryT): Promise<History> {
     const history = this.historyRepository.create({
       text: text,
+      board,
       task,
-    })
-    return this.historyRepository.save(history)
-  }
-
-  async createSectionHistory(section: Section, text: string[]): Promise<History> {
-    const history = this.historyRepository.create({
-      text: text,
-      section,
     })
     return this.historyRepository.save(history)
   }

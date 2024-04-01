@@ -12,6 +12,7 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const section_module_1 = require("./modules/section/section.module");
 const task_module_1 = require("./modules/task/task.module");
+const history_module_1 = require("./modules/history/history.module");
 const board_module_1 = require("./modules/board/board.module");
 let AppModule = class AppModule {
 };
@@ -37,7 +38,7 @@ exports.AppModule = AppModule = __decorate([
             board_module_1.BoardModule,
             section_module_1.SectionModule,
             task_module_1.TaskModule,
-            // HistoryModule,
+            history_module_1.HistoryModule,
         ],
     })
 ], AppModule);

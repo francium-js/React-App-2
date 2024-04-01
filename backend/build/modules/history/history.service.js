@@ -26,17 +26,24 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const history_entity_1 = require("../../entities/history.entity");
+const board_entity_1 = require("../../entities/board.entity");
 const task_entity_1 = require("../../entities/task.entity");
 let HistoryService = class HistoryService {
-    constructor(historyRepository, taskRepository) {
+    constructor(historyRepository, taskRepository, boardRepository) {
         this.historyRepository = historyRepository;
         this.taskRepository = taskRepository;
+        this.boardRepository = boardRepository;
     }
-    get() {
+    get(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.historyRepository.find({
-                relations: ['task'],
+            const board = yield this.boardRepository.findOne({
+                where: { id },
+                relations: ['history'],
             });
+            if (!board) {
+                throw new common_1.HttpException(`Board with ${id} not found`, common_1.HttpStatus.NOT_FOUND);
+            }
+            return board.history;
         });
     }
     getByTaskId(id) {
@@ -51,20 +58,12 @@ let HistoryService = class HistoryService {
             return task.history;
         });
     }
-    createTaskHistory(task, text) {
-        return __awaiter(this, void 0, void 0, function* () {
+    createHistory(_a) {
+        return __awaiter(this, arguments, void 0, function* ({ board, task, text }) {
             const history = this.historyRepository.create({
                 text: text,
+                board,
                 task,
-            });
-            return this.historyRepository.save(history);
-        });
-    }
-    createSectionHistory(section, text) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const history = this.historyRepository.create({
-                text: text,
-                section,
             });
             return this.historyRepository.save(history);
         });
@@ -75,7 +74,9 @@ exports.HistoryService = HistoryService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(history_entity_1.History)),
     __param(1, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
+    __param(2, (0, typeorm_1.InjectRepository)(board_entity_1.Board)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], HistoryService);
 //# sourceMappingURL=history.service.js.map

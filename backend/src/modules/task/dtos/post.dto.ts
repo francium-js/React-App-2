@@ -1,7 +1,7 @@
 import { IsIn, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-export class PostBodyDto {
+export class PostTaskDto {
   @IsNotEmpty()
   @IsString()
   @IsUUID()
@@ -33,7 +33,7 @@ export class PostBodyDto {
   description: string
 }
 
-export class PostResponseDto {
+export class PostTaskResponseDto {
   @ApiProperty({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' })
   id: string
 

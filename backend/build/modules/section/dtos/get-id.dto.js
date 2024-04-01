@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetSectionIdResponseDto = exports.GetSectionIdParamsDto = void 0;
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
-const task_entity_1 = require("../../../entities/task.entity");
 class GetSectionIdParamsDto {
 }
 exports.GetSectionIdParamsDto = GetSectionIdParamsDto;
@@ -34,8 +33,4 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'To do' }),
     __metadata("design:type", String)
 ], GetSectionIdResponseDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ type: () => [task_entity_1.Task] }),
-    __metadata("design:type", Array)
-], GetSectionIdResponseDto.prototype, "tasks", void 0);
 //# sourceMappingURL=get-id.dto.js.map

@@ -14,7 +14,7 @@ export class BoardService {
   ) {}
 
   async get(): Promise<GetBoardResponseDto[]> {
-    return this.boardRepository.find()
+    return this.boardRepository.find({ relations: ['sections'] })
   }
 
   async create(name: string): Promise<PostBoardResponseDto> {
@@ -26,15 +26,19 @@ export class BoardService {
   async patch(id: string, name: string): Promise<void> {
     const board = await this.boardRepository.update({ id }, { name })
 
-    if (board.affected === 0) {
+    if (!board.affected) {
       throw new HttpException(`Board with id ${id} not found`, HttpStatus.NOT_FOUND)
     }
+  }
+
+  async getById(id: string): Promise<GetBoardResponseDto> {
+    return this.boardRepository.findOne({ where: { id } })
   }
 
   async deleteById(id: string): Promise<void> {
     const deleteResult = await this.boardRepository.delete(id)
 
-    if (deleteResult.affected === 0) {
+    if (!deleteResult.affected) {
       throw new HttpException(`Board with id ${id} not found`, HttpStatus.NOT_FOUND)
     }
   }

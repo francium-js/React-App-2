@@ -32,7 +32,7 @@ let BoardService = class BoardService {
     }
     get() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.boardRepository.find();
+            return this.boardRepository.find({ relations: ['sections'] });
         });
     }
     create(name) {
@@ -45,15 +45,20 @@ let BoardService = class BoardService {
     patch(id, name) {
         return __awaiter(this, void 0, void 0, function* () {
             const board = yield this.boardRepository.update({ id }, { name });
-            if (board.affected === 0) {
+            if (!board.affected) {
                 throw new common_1.HttpException(`Board with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
+        });
+    }
+    getById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.boardRepository.findOne({ where: { id } });
         });
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const deleteResult = yield this.boardRepository.delete(id);
-            if (deleteResult.affected === 0) {
+            if (!deleteResult.affected) {
                 throw new common_1.HttpException(`Board with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
         });

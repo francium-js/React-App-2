@@ -26,57 +26,74 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const section_entity_1 = require("../../entities/section.entity");
+const board_entity_1 = require("../../entities/board.entity");
 const history_service_1 = require("../history/history.service");
 let SectionService = class SectionService {
-    constructor(sectionRepository, historyService) {
+    constructor(sectionRepository, boardRepository, historyService) {
         this.sectionRepository = sectionRepository;
+        this.boardRepository = boardRepository;
         this.historyService = historyService;
     }
-    create(name) {
+    create(boardId, name) {
         return __awaiter(this, void 0, void 0, function* () {
-            const createdSection = yield this.sectionRepository.save({
+            const board = yield this.boardRepository.findOne({ where: { id: boardId } });
+            if (!board) {
+                throw new common_1.HttpException(`Board with id ${boardId} not found`, common_1.HttpStatus.NOT_FOUND);
+            }
+            const createdSection = yield this.sectionRepository.create({
                 name,
+                board,
             });
-            this.historyService.createSectionHistory(createdSection, [
-                `Section "${createdSection.name}" created`,
-            ]);
-            return createdSection;
+            const section = yield this.sectionRepository.save(createdSection);
+            yield this.historyService.createHistory({
+                board,
+                text: [`Section "${section.name}" created`],
+            });
+            return section;
         });
     }
     patch(id, name) {
         return __awaiter(this, void 0, void 0, function* () {
             const section = yield this.sectionRepository.findOne({
                 where: { id },
+                relations: ['board'],
             });
             if (!section) {
                 throw new common_1.HttpException(`Section with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
-            yield this.sectionRepository.update({ id: id }, { name });
-            yield this.historyService.createSectionHistory(section, [
-                `Section "${name}" renamed to ${section.name}`,
-            ]);
+            yield this.sectionRepository.update({ id }, { name });
+            yield this.historyService.createHistory({
+                board: section.board,
+                text: [`Section "${section.name}" renamed to ${name}`],
+            });
         });
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.sectionRepository.findOne({
+            const board = yield this.boardRepository.findOne({
                 where: { id },
-                relations: ['tasks'],
+                relations: ['sections'],
             });
+            if (!board) {
+                throw new common_1.HttpException(`Board with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
+            }
+            return board.sections;
         });
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const section = yield this.sectionRepository.findOne({
                 where: { id },
+                relations: ['board'],
             });
             if (!section) {
                 throw new common_1.HttpException(`Section with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
+            yield this.historyService.createHistory({
+                board: section.board,
+                text: [`Section "${section.name}" deleted`],
+            });
             yield this.sectionRepository.delete(id);
-            yield this.historyService.createSectionHistory(section, [
-                `Section "${section.name}" deleted`,
-            ]);
         });
     }
 };
@@ -84,7 +101,9 @@ exports.SectionService = SectionService;
 exports.SectionService = SectionService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(section_entity_1.Section)),
+    __param(1, (0, typeorm_1.InjectRepository)(board_entity_1.Board)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         history_service_1.HistoryService])
 ], SectionService);
 //# sourceMappingURL=section.service.js.map

@@ -10,7 +10,7 @@ import { HistoryService } from '../history/history.service'
 import { giveArrayChangedProps } from 'src/shared/helpers/giveArrayChangedProps'
 
 import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch-dto'
-import { PostBodyDto, PostResponseDto } from './dtos/post.dto'
+import { PostTaskDto, PostTaskResponseDto } from './dtos/post.dto'
 import { GetTaskIdResponseDto } from './dtos/get-id.dto'
 
 @Injectable()
@@ -36,14 +36,15 @@ export class TaskService {
     return section.tasks
   }
 
-  async create({ sectionId, ...props }: PostBodyDto): Promise<PostResponseDto> {
+  async create({ sectionId, ...props }: PostTaskDto): Promise<PostTaskResponseDto> {
     const section = await this.sectionRepository.findOne({
       where: { id: sectionId },
+      relations: ['board'],
     })
 
     if (!section) {
       throw new HttpException(
-        `Board section with id ${sectionId} not found`,
+        `Section with id ${sectionId} not found`,
         HttpStatus.NOT_FOUND,
       )
     }
@@ -54,13 +55,15 @@ export class TaskService {
       section,
     })
 
-    const savedTask = await this.taskRepository.save(createdTask)
+    const task = await this.taskRepository.save(createdTask)
 
-    await this.historyService.createTaskHistory(savedTask, [
-      `Task "${savedTask.title}" created`,
-    ])
+    await this.historyService.createHistory({
+      board: section.board,
+      task,
+      text: [`Task "${task.title}" created`],
+    })
 
-    return savedTask
+    return task
   }
 
   async patch({
@@ -76,6 +79,7 @@ export class TaskService {
 
     const section = await this.sectionRepository.findOne({
       where: { id: sectionId },
+      relations: ['board'],
     })
 
     if (!task) {
@@ -83,7 +87,11 @@ export class TaskService {
     }
 
     const text = giveArrayChangedProps(task, { ...rest, status: section.name })
-    await this.historyService.createTaskHistory(task, text)
+    await this.historyService.createHistory({
+      board: section.board,
+      task,
+      text,
+    })
     await this.taskRepository.update(
       { id },
       { ...rest, section, status: section.name },
@@ -96,15 +104,21 @@ export class TaskService {
   }
 
   async deleteById(id: string): Promise<void> {
-    const task = await this.taskRepository.findOne({ where: { id } })
+    const task = await this.taskRepository.findOne({
+      where: { id },
+      relations: ['section', 'section.board'],
+    })
 
     if (!task) {
       throw new HttpException(`Task with id ${id} not found`, HttpStatus.NOT_FOUND)
     }
 
+    await this.historyService.createHistory({
+      board: task.section.board,
+      task,
+      text: [`Task "${task.title}" deleted`],
+    })
+
     await this.taskRepository.delete(id)
-    await this.historyService.createTaskHistory(task, [
-      `Task "${task.title}" deleted`,
-    ])
   }
 }

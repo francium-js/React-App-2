@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Board.prototype, "sections", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => history_entity_1.History, history => history.board),
+    (0, typeorm_1.OneToMany)(() => history_entity_1.History, history => history.board, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], Board.prototype, "history", void 0);
 exports.Board = Board = __decorate([

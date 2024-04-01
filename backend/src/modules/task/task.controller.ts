@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { TaskService } from './task.service'
 
-import { PostBodyDto, PostResponseDto } from './dtos/post.dto'
+import { PostTaskDto, PostTaskResponseDto } from './dtos/post.dto'
 import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch-dto'
 import { GetTaskIdParamsDto, GetTaskIdResponseDto } from './dtos/get-id.dto'
 import { DeleteTaskIdParamsDto, DeleteTaskResponseDto } from './dtos/delete-id.dto'
@@ -14,12 +14,12 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create task' })
+  @ApiOperation({ summary: 'Create new task' })
   @ApiResponse({
     status: 200,
-    type: PostResponseDto,
+    type: PostTaskResponseDto,
   })
-  async create(@Body() data: PostBodyDto): Promise<PostResponseDto> {
+  async create(@Body() data: PostTaskDto): Promise<PostTaskResponseDto> {
     return this.taskService.create(data)
   }
 
@@ -34,7 +34,7 @@ export class TaskController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get all tasks from section' })
+  @ApiOperation({ summary: 'Get tasks from section' })
   @ApiResponse({
     status: 200,
     type: [GetTaskIdResponseDto],

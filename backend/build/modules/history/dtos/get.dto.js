@@ -9,11 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetHistoryResponseDto = void 0;
+exports.GetHistoryResponseDto = exports.GetHistoryParamsDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const section_entity_1 = require("../../../entities/section.entity");
 const board_entity_1 = require("../../../entities/board.entity");
 const task_entity_1 = require("../../../entities/task.entity");
+const class_validator_1 = require("class-validator");
+class GetHistoryParamsDto {
+}
+exports.GetHistoryParamsDto = GetHistoryParamsDto;
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ example: '56db67dd-7f14-4667-9fb3-800685ac835b' }),
+    __metadata("design:type", String)
+], GetHistoryParamsDto.prototype, "id", void 0);
 class GetHistoryResponseDto {
 }
 exports.GetHistoryResponseDto = GetHistoryResponseDto;

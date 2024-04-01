@@ -34,8 +34,8 @@ let SectionController = class SectionController {
         this.sectionService = sectionService;
     }
     create(_a) {
-        return __awaiter(this, arguments, void 0, function* ({ name }) {
-            return this.sectionService.create(name);
+        return __awaiter(this, arguments, void 0, function* ({ name, boardId }) {
+            return this.sectionService.create(boardId, name);
         });
     }
     patch(_a) {
@@ -59,7 +59,7 @@ let SectionController = class SectionController {
 exports.SectionController = SectionController;
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Create board section' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Create new section' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: post_dto_1.PostSectionResponseDto,
@@ -71,7 +71,7 @@ __decorate([
 ], SectionController.prototype, "create", null);
 __decorate([
     (0, common_1.Patch)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Patch board section' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Patch section' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: patch_dto_1.PatchSectionResponseDto,
@@ -83,7 +83,7 @@ __decorate([
 ], SectionController.prototype, "patch", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all sections' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get sections from board' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: [get_id_dto_1.GetSectionIdResponseDto],
@@ -95,7 +95,7 @@ __decorate([
 ], SectionController.prototype, "get", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Delete board section' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete section' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: delete_id_dto_1.DeleteSectionIdResponseDto,

@@ -13,12 +13,13 @@ const history_controller_1 = require("./history.controller");
 const history_service_1 = require("./history.service");
 const history_entity_1 = require("../../entities/history.entity");
 const task_entity_1 = require("../../entities/task.entity");
+const board_entity_1 = require("../../entities/board.entity");
 let HistoryModule = class HistoryModule {
 };
 exports.HistoryModule = HistoryModule;
 exports.HistoryModule = HistoryModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([history_entity_1.History, task_entity_1.Task])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([history_entity_1.History, task_entity_1.Task, board_entity_1.Board])],
         controllers: [history_controller_1.HistoryController],
         providers: [history_service_1.HistoryService],
     })

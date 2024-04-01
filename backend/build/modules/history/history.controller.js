@@ -31,9 +31,9 @@ let HistoryController = class HistoryController {
     constructor(historyService) {
         this.historyService = historyService;
     }
-    getAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.historyService.get();
+    getAll(_a) {
+        return __awaiter(this, arguments, void 0, function* ({ id }) {
+            return this.historyService.get(id);
         });
     }
     getById(_a) {
@@ -44,18 +44,19 @@ let HistoryController = class HistoryController {
 };
 exports.HistoryController = HistoryController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/board/:id'),
     (0, swagger_1.ApiOperation)({ summary: 'Get all history' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: [get_dto_1.GetHistoryResponseDto],
     }),
+    __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [get_dto_1.GetHistoryParamsDto]),
     __metadata("design:returntype", Promise)
 ], HistoryController.prototype, "getAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
+    (0, common_1.Get)('/task/:id'),
     (0, swagger_1.ApiOperation)({ summary: 'Get task history' }),
     (0, swagger_1.ApiResponse)({
         status: 200,

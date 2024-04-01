@@ -59,14 +59,14 @@ let TaskController = class TaskController {
 exports.TaskController = TaskController;
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Create task' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Create new task' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        type: post_dto_1.PostResponseDto,
+        type: post_dto_1.PostTaskResponseDto,
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [post_dto_1.PostBodyDto]),
+    __metadata("design:paramtypes", [post_dto_1.PostTaskDto]),
     __metadata("design:returntype", Promise)
 ], TaskController.prototype, "create", null);
 __decorate([
@@ -83,7 +83,7 @@ __decorate([
 ], TaskController.prototype, "patch", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all tasks from section' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get tasks from section' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         type: [get_id_dto_1.GetTaskIdResponseDto],

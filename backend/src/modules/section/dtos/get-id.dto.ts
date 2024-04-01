@@ -1,8 +1,6 @@
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-import { Task } from 'src/entities/task.entity'
-
 export class GetSectionIdParamsDto {
   @IsNotEmpty()
   @IsString()
@@ -17,7 +15,4 @@ export class GetSectionIdResponseDto {
 
   @ApiProperty({ example: 'To do' })
   name: string
-
-  @ApiProperty({ type: () => [Task] })
-  tasks: Task[]
 }

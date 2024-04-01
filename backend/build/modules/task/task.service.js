@@ -63,16 +63,19 @@ let TaskService = class TaskService {
             var { sectionId } = _a, props = __rest(_a, ["sectionId"]);
             const section = yield this.sectionRepository.findOne({
                 where: { id: sectionId },
+                relations: ['board'],
             });
             if (!section) {
-                throw new common_1.HttpException(`Board section with id ${sectionId} not found`, common_1.HttpStatus.NOT_FOUND);
+                throw new common_1.HttpException(`Section with id ${sectionId} not found`, common_1.HttpStatus.NOT_FOUND);
             }
             const createdTask = this.taskRepository.create(Object.assign(Object.assign({}, props), { status: section.name, section }));
-            const savedTask = yield this.taskRepository.save(createdTask);
-            yield this.historyService.createTaskHistory(savedTask, [
-                `Task "${savedTask.title}" created`,
-            ]);
-            return savedTask;
+            const task = yield this.taskRepository.save(createdTask);
+            yield this.historyService.createHistory({
+                board: section.board,
+                task,
+                text: [`Task "${task.title}" created`],
+            });
+            return task;
         });
     }
     patch(_a) {
@@ -84,12 +87,17 @@ let TaskService = class TaskService {
             }
             const section = yield this.sectionRepository.findOne({
                 where: { id: sectionId },
+                relations: ['board'],
             });
             if (!task) {
                 throw new common_1.HttpException(`Task with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
             const text = (0, giveArrayChangedProps_1.giveArrayChangedProps)(task, Object.assign(Object.assign({}, rest), { status: section.name }));
-            yield this.historyService.createTaskHistory(task, text);
+            yield this.historyService.createHistory({
+                board: section.board,
+                task,
+                text,
+            });
             yield this.taskRepository.update({ id }, Object.assign(Object.assign({}, rest), { section, status: section.name }));
             return this.taskRepository.findOne({
                 where: { id },
@@ -99,14 +107,19 @@ let TaskService = class TaskService {
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const task = yield this.taskRepository.findOne({ where: { id } });
+            const task = yield this.taskRepository.findOne({
+                where: { id },
+                relations: ['section', 'section.board'],
+            });
             if (!task) {
                 throw new common_1.HttpException(`Task with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
             }
+            yield this.historyService.createHistory({
+                board: task.section.board,
+                task,
+                text: [`Task "${task.title}" deleted`],
+            });
             yield this.taskRepository.delete(id);
-            yield this.historyService.createTaskHistory(task, [
-                `Task "${task.title}" deleted`,
-            ]);
         });
     }
 };

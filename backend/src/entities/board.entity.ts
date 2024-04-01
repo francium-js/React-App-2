@@ -14,6 +14,6 @@ export class Board {
   @OneToMany(() => Section, section => section.board, { onDelete: 'CASCADE' })
   sections: Section[]
 
-  @OneToMany(() => History, history => history.board)
+  @OneToMany(() => History, history => history.board, { onDelete: 'CASCADE' })
   history: History[]
 }

@@ -27,7 +27,7 @@ import { BoardModule } from './modules/board/board.module'
     BoardModule,
     SectionModule,
     TaskModule,
-    // HistoryModule,
+    HistoryModule,
   ],
 })
 export class AppModule {}
