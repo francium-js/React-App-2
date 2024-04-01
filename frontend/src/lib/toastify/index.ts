@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 
 export const goodToast = (text: string) => {
   toast.success(text, {
-    position: 'top-left',
+    position: 'top-center',
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -15,7 +15,7 @@ export const goodToast = (text: string) => {
 
 export const badToast = (text: string) => {
   toast.error(text, {
-    position: 'top-left',
+    position: 'top-center',
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,

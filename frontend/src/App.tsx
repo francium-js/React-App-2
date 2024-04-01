@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify'
 import LoadingPage from 'src/pages/LoadingPage'
 
 import { store } from 'src/redux/store'
-import ModalProvider from './contexts/ModalProvider'
 import { Router } from './routes'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -17,9 +16,7 @@ const App = () => {
     <Suspense fallback={<LoadingPage />}>
       <ToastContainer />
       <Provider store={store}>
-        <ModalProvider>
-          <RouterProvider router={Router} />
-        </ModalProvider>
+        <RouterProvider router={Router}></RouterProvider>
       </Provider>
     </Suspense>
   )

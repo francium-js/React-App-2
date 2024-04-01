@@ -1,5 +1,6 @@
 import { MdHistory } from 'react-icons/md'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { IoArrowBack } from 'react-icons/io5'
 
 import Button from 'src/components/Button'
 
@@ -9,20 +10,29 @@ import { userControlPanel } from 'src/components/ControlPanel/useControlPanel'
 import s from 'src/components/ControlPanel/styles.module.scss'
 
 const ControlPanel = (): JSX.Element => {
-  const { onOpen } = userControlPanel()
+  const { onOpen, navigate } = userControlPanel()
 
   return (
     <div className={s.container}>
-      <h1>My Task Board</h1>
+      <Button
+        style={{ backgroundColor: 'white', border: 'none' }}
+        leftIcon={<IoArrowBack />}
+        onClick={() => {
+          navigate(-1)
+        }}
+      >
+        Go back
+      </Button>
       <div className={s.buttonsContainer}>
         <Button
           style={{ backgroundColor: 'white', border: 'none' }}
-          text="History"
           leftIcon={<MdHistory />}
           onClick={() => {
             onOpen({ name: Modals.ALL_HISTORY })
           }}
-        />
+        >
+          History
+        </Button>
         <Button
           style={{
             backgroundColor: '#30406e',
@@ -30,11 +40,12 @@ const ControlPanel = (): JSX.Element => {
             border: 'none',
           }}
           leftIcon={<AiOutlinePlus fill="white" />}
-          text="Create new list"
           onClick={() => {
-            onOpen({ name: Modals.CREATE_NEW_LIST })
+            onOpen({ name: Modals.CREATE_NEW_SECTION })
           }}
-        />
+        >
+          Create new list
+        </Button>
       </div>
     </div>
   )

@@ -1,12 +1,10 @@
-import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { useModals } from 'src/contexts/ModalProvider/useModals'
 
-import type { AppDispatch } from 'src/redux/store'
-
 export const userControlPanel = () => {
-  const dispatch = useDispatch<AppDispatch>()
   const { onOpen } = useModals()
+  const navigate = useNavigate()
 
-  return { dispatch, onOpen }
+  return { onOpen, navigate }
 }

@@ -1,33 +1,31 @@
-import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import type { AddNewCardPayLoadT, UpdateCardPayLoadT } from 'src/redux/types'
+import type { CreateTaskPayLoadT, UpdatePayLoadT } from 'src/types/api'
+import { FetchEndpoint } from 'src/constants'
 
-import { FETCH_URL } from 'src/constants'
-
-axios.defaults.baseURL = FETCH_URL
+import api from 'src/config/axios'
 
 class TaskService {
+  create = createAsyncThunk('task/create', async (payload: CreateTaskPayLoadT) => {
+    const { data } = await api.post(FetchEndpoint.TASK, payload)
+
+    return data
+  })
+
+  patch = createAsyncThunk('task/patch', async (payload: UpdatePayLoadT) => {
+    const { data } = await api.patch(FetchEndpoint.TASK, payload)
+
+    return data
+  })
+
   get = createAsyncThunk('task/get', async (id: string) => {
-    const { data } = await axios.get(`/task/${id}`)
-
-    return data
-  })
-
-  create = createAsyncThunk('task/create', async (payload: AddNewCardPayLoadT) => {
-    const { data } = await axios.post('/task', payload)
-
-    return data
-  })
-
-  patch = createAsyncThunk('task/patch', async (payload: UpdateCardPayLoadT) => {
-    const { data } = await axios.patch(`/task`, payload)
+    const { data } = await api.get(FetchEndpoint.TASK + `/${id}`)
 
     return data
   })
 
   remove = createAsyncThunk('task/delete', async (id: string) => {
-    const { data } = await axios.delete(`/task/${id}`)
+    const { data } = await api.delete(FetchEndpoint.TASK + `/${id}`)
 
     return data
   })

@@ -4,15 +4,16 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
 import type { AppDispatch } from 'src/redux/store'
-import type { CardFormT } from 'src/components/FormTaskCard/types'
+import type { TaskFormT } from 'src/components/FormTask/types'
 import type { UseModalTaskInfoProps } from 'src/components/Modals/ModalTaskInfo/types'
 
 import { useAppSelector } from 'src/redux/store'
+import { useModals } from 'src/contexts/ModalProvider/useModals'
+
 import { dateToMilliseconds, dateForCalendar } from 'src/helpers'
 
 import historyService from 'src/redux/services/history-operations'
 import taskService from 'src/redux/services/task-operations'
-import { useModals } from 'src/contexts/ModalProvider/useModals'
 
 import { schema } from 'src/components/Modals/ModalTaskInfo/validationSchema'
 
@@ -21,7 +22,6 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
   const { onClose } = useModals()
 
   const dispatch = useDispatch<AppDispatch>()
-
   const { isLoading } = useAppSelector(state => state.task)
   const { data: historyData, isLoading: historyIsLoading } = useAppSelector(
     state => state.history,
@@ -35,13 +35,11 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
 
   const filteredData = historyData.filter(item => item?.task?.id === data.id)
 
-  console.log(dateForCalendar(Number(dueDate)))
-
   const {
     control,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm<CardFormT>({
+  } = useForm<TaskFormT>({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
     defaultValues: {
@@ -53,7 +51,7 @@ export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
     },
   })
 
-  const createBoardSection = ({ dueDate, sectionId, ...rest }: CardFormT): void => {
+  const createBoardSection = ({ dueDate, sectionId, ...rest }: TaskFormT): void => {
     dispatch(
       taskService.patch({
         id,

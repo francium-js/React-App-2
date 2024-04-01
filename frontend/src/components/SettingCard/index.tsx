@@ -49,7 +49,7 @@ const SettingCard = ({ onEdit, onDelete, onAdd }: SettingCardProps): JSX.Element
             }}
           >
             <AiOutlinePlus size={20} />
-            Add new card
+            Add new Task
           </button>
         )}
         <button

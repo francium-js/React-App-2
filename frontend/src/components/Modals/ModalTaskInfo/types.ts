@@ -1,9 +1,9 @@
 import type { ModalDialogProps } from 'src/components/Modals/types'
-import type { CardT } from 'src/types'
+import type { TaskT } from 'src/types'
 
 export type UseModalTaskInfoProps = {
   openedit?: boolean
-} & CardT
+} & TaskT
 
 export type ModalTaskInfoProps = {
   data: UseModalTaskInfoProps

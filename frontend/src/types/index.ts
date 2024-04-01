@@ -4,10 +4,10 @@ export type HistoryT = {
   id: string
   text: string[]
   createdAt: string
-  task: CardT
+  task: TaskT
 }
 
-export type CardT = {
+export type TaskT = {
   id: string
   title: string
   status: string
@@ -18,6 +18,11 @@ export type CardT = {
 }
 
 export type SectionT = {
+  id: string
+  name: string
+}
+
+export type BoardT = {
   id: string
   name: string
 }

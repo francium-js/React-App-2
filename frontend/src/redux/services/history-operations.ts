@@ -1,18 +1,17 @@
-import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { FETCH_URL } from 'src/constants'
+import { FetchEndpoint } from 'src/constants'
 
-axios.defaults.baseURL = FETCH_URL
+import api from 'src/config/axios'
 
 class HistoryService {
   getById = createAsyncThunk('history/getById', async (id: string) => {
-    const { data } = await axios.get(`/history/${id}`)
+    const { data } = await api.get(FetchEndpoint.HISTORY_TASK + `/${id}`)
 
     return data
   })
 
-  getAll = createAsyncThunk('history/getAll', async () => {
-    const { data } = await axios.get('/history')
+  getAll = createAsyncThunk('history/getAll', async (id: string) => {
+    const { data } = await api.get(FetchEndpoint.HISTORY_BOARD + `/${id}`)
 
     return data
   })

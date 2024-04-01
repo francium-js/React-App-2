@@ -1,3 +1,4 @@
 export enum RoutesPath {
-  HOME = '/',
+  BOARD_LIST = '/',
+  BOARD = '/:boardId',
 }

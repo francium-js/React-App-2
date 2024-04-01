@@ -6,8 +6,9 @@ import type { AppDispatch } from 'src/redux/store'
 import type { EditSectionT } from 'src/components/Modals/ModalEditSection/types'
 
 import { useAppSelector } from 'src/redux/store'
-import boardService from 'src/redux/services/section-operations'
 import { useModals } from 'src/contexts/ModalProvider/useModals'
+
+import boardService from 'src/redux/services/section-operations'
 
 import { schema } from 'src/components/Modals/ModalEditSection/validationSchema'
 

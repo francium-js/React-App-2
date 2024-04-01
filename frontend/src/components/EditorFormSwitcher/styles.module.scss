@@ -1,0 +1,15 @@
+.editButton_Wrapper {
+  @apply absolute
+    top-0
+    right-0;
+
+  & > button {
+    @apply flex
+        rounded-md
+        border-2
+        border-black
+        p-1
+        items-center
+        cursor-pointer;
+  }
+}

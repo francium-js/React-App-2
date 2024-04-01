@@ -1,11 +1,9 @@
-import { FiEdit } from 'react-icons/fi'
-import { GiConfirmed } from 'react-icons/gi'
-
 import type { ModalTaskInfoProps } from 'src/components/Modals/ModalTaskInfo/types'
 
 import SettingsModalsLayout from 'src/components/Modals/SettingsModalsLayout'
-import FormTaskCard from 'src/components/FormTaskCard'
-import TaskCardInfo from 'src/components/TaskCardInfo'
+import EditorFormSwitcher from 'src/components/EditorFormSwitcher'
+import FormTask from 'src/components/FormTask'
+import TaskInfo from 'src/components/TaskInfo'
 import HistoryItem from 'src/components/HistoryItem'
 import Skeleton from 'src/components/Skeleton'
 
@@ -38,30 +36,19 @@ const ModalTaskInfo = ({
       Button={<></>}
     >
       <div className={s.container}>
-        <div className={s.cardFormWrapper}>
+        <div className={s.taskForm_Wrapper}>
           {isEditor ? (
-            <FormTaskCard errors={errors} control={control} />
+            <FormTask errors={errors} control={control} />
           ) : (
-            <TaskCardInfo {...data} />
+            <TaskInfo {...data} />
           )}
-
-          <div className={s.editButtonWrapper}>
-            {isEditor ? (
-              <button
-                style={{
-                  backgroundColor: !isDirty || isLoading ? '#f32d2d' : '#3bdf43',
-                }}
-                disabled={isLoading}
-                onClick={onConfirm}
-              >
-                <GiConfirmed size={30} />
-              </button>
-            ) : (
-              <button onClick={() => useIsEditor(true)}>
-                <FiEdit size={30} />
-              </button>
-            )}
-          </div>
+          <EditorFormSwitcher
+            isDirty={isDirty}
+            isLoading={isLoading}
+            isEditor={isEditor}
+            toogle={useIsEditor}
+            onConfirm={onConfirm}
+          />
         </div>
 
         <div className={s.historyContainer}>

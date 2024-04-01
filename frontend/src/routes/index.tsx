@@ -3,13 +3,26 @@ import { lazy } from 'react'
 
 import { RoutesPath } from 'src/routes/routes'
 
-const TaskBoardPage = lazy(() => import('src/pages/TaskBoardPage'))
+const BoardListPage = lazy(() => import('src/pages/BoardListPage'))
+const BoardPage = lazy(() => import('src/pages/BoardPage'))
 const ErrorPage = lazy(() => import('src/pages/ErrorPage'))
+
+const BoardLayout = lazy(() => import('src/layouts/BoardLayout'))
 
 export const Router = createBrowserRouter([
   {
-    path: RoutesPath.HOME,
-    element: <TaskBoardPage />,
+    path: '/',
+    element: <BoardLayout />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: RoutesPath.BOARD_LIST,
+        element: <BoardListPage />,
+      },
+      {
+        path: RoutesPath.BOARD,
+        element: <BoardPage />,
+      },
+    ],
   },
 ])

@@ -3,7 +3,7 @@ import SettingsModalsLayout from 'src/components/Modals/SettingsModalsLayout'
 import type { ModalDialogProps } from 'src/components/Modals/types'
 
 import { useModalCreateNewSection } from 'src/components/Modals/ModalCreateNewSection/useModalCreateNewSection'
-import FormCreateSection from 'src/components/FormSection'
+import FormCreateSection from 'src/components/FormName'
 
 const ModalCreateNewSection = ({
   isOpen,

@@ -1,0 +1,129 @@
+.container {
+  @apply flex
+  flex-col
+  items-center
+  justify-center
+  w-full
+  h-full
+  gap-y-5;
+
+  & > h2 {
+    @apply text-white
+        text-3xl
+        font-medium;
+  }
+
+  & > div {
+    @apply flex
+    bg-gray-800
+    flex-col
+    w-96
+    min-h-28
+    border-2
+    rounded-lg
+    overflow-y-auto
+    gap-y-3
+    p-3;
+
+    max-height: 70vh;
+
+    @media screen and (max-width: 576px) {
+      @apply w-full;
+    }
+  }
+}
+
+.button {
+  @apply relative
+  py-2
+  px-10
+  text-2xl
+  rounded-lg
+  transition-transform
+  bg-white;
+
+  @media screen and (min-width: 576px) {
+    & > div {
+      @apply hidden;
+    }
+  }
+
+  &:hover {
+    & > div {
+      @apply block;
+    }
+  }
+
+  & > div:first-child {
+    @apply absolute
+    left-3
+    top-1/2
+    -translate-y-1/2;
+  }
+
+  & > div:last-child {
+    @apply absolute
+    right-3
+    top-1/2
+    -translate-y-1/2;
+  }
+
+  & > p {
+    @apply overflow-hidden 
+    whitespace-nowrap
+    text-ellipsis;
+  }
+
+  -webkit-box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.createBoard {
+  @apply text-center
+        py-1
+        px-4
+        border
+        border-black
+        rounded-md
+        text-2xl
+        transition-transform
+         text-white
+        bg-gray-800
+        font-medium;
+
+  -webkit-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  @media screen and (max-width: 576px) {
+    @apply text-base;
+  }
+}
+
+.skeleton {
+  @apply flex
+  flex-col
+  p-2
+  w-96
+  gap-4;
+
+  & > div {
+    @apply h-10 
+    rounded-md;
+
+    height: 42px;
+  }
+
+  @media screen and (max-width: 576px) {
+    @apply w-full;
+  }
+}

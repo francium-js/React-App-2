@@ -12,6 +12,13 @@
       @apply text-xl;
     }
   }
+
+  @media screen and (max-width: 576px) {
+    & button {
+      @apply p-1
+      text-sm;
+    }
+  }
 }
 
 .buttonsContainer {
@@ -20,10 +27,5 @@ gap-8;
 
   @media screen and (max-width: 576px) {
     @apply gap-2.5;
-
-    & > button {
-      @apply p-1
-      text-sm;
-    }
   }
 }

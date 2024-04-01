@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -6,14 +7,16 @@ import type { AppDispatch } from 'src/redux/store'
 import type { CreateNewSectionT } from 'src/components/Modals/ModalCreateNewSection/types'
 
 import { useAppSelector } from 'src/redux/store'
-import boardService from 'src/redux/services/section-operations'
 import { useModals } from 'src/contexts/ModalProvider/useModals'
+
+import sectionService from 'src/redux/services/section-operations'
 
 import { schema } from 'src/components/Modals/ModalCreateNewSection/validationSchema'
 
 export const useModalCreateNewSection = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { isLoading } = useAppSelector(state => state.task)
+  const { boardId = '' } = useParams()
 
   const { onClose } = useModals()
 
@@ -26,8 +29,8 @@ export const useModalCreateNewSection = () => {
     resolver: yupResolver(schema),
   })
 
-  const createBoardSection = (data: CreateNewSectionT) => {
-    dispatch(boardService.create(data.name))
+  const createBoardSection = ({ name }: CreateNewSectionT) => {
+    dispatch(sectionService.create({ name, boardId }))
     onClose()
   }
 

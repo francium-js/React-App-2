@@ -1,6 +1,5 @@
 .container {
-  @apply 
-  absolute 
+  @apply absolute 
   top-1/2 
   left-1/2 
   transform 
@@ -8,8 +7,7 @@
   -translate-y-1/2;
 
   & > h1 {
-    @apply 
-    text-5xl 
+    @apply text-5xl 
     text-white;
   }
 }

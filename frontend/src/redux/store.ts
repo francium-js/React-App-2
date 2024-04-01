@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux'
 
 import type { TypedUseSelectorHook } from 'react-redux'
 
-import taskReducer from 'src/redux/features/task-slice'
+import boardReducer from 'src/redux/features/board-slice'
 import sectionReducer from 'src/redux/features/section-slice'
+import taskReducer from 'src/redux/features/task-slice'
 import historyReducer from 'src/redux/features/history-slice'
 
 export const store = configureStore({
   reducer: {
-    task: taskReducer,
+    board: boardReducer,
     section: sectionReducer,
+    task: taskReducer,
     history: historyReducer,
   },
 })

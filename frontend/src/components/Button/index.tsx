@@ -6,14 +6,16 @@ import s from 'src/components/Button/styles.module.scss'
 
 const Button = ({
   leftIcon = <AiOutlinePlus />,
+  rightIcon,
   type = 'button',
-  text,
+  children,
   ...props
 }: ButtonProps): JSX.Element => {
   return (
     <button className={s.button} type={type} {...props}>
-      {leftIcon}
-      {text}
+      <div>{leftIcon}</div>
+      {children}
+      <div>{rightIcon}</div>
     </button>
   )
 }

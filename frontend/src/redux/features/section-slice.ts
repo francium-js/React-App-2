@@ -1,28 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { type AsyncThunk } from '@reduxjs/toolkit'
-
-type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
-
-type PendingAction = ReturnType<GenericAsyncThunk['pending']>
-type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>
-type FulfilledAction = ReturnType<GenericAsyncThunk['fulfilled']>
-
 import type { SectionT } from 'src/types'
 
 import { addAsyncHandlers } from 'src/helpers'
-import { badToast, goodToast } from 'src/lib/toastify'
+import { goodToast } from 'src/lib/toastify'
 
 import sectionService from 'src/redux/services/section-operations'
 
 export type InitialStateT = {
-  isLoadingSection: boolean
   isLoading: boolean
   data: SectionT[]
 }
 
 const initialState: InitialStateT = {
-  isLoadingSection: false,
   isLoading: false,
   data: [],
 }

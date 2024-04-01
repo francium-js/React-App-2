@@ -3,9 +3,9 @@ import SettingsModalsLayout from 'src/components/Modals/SettingsModalsLayout'
 import type { ModalEditSectionProps } from 'src/components/Modals/ModalEditSection/types'
 
 import { useModalEditSection } from 'src/components/Modals/ModalEditSection/useModalEditSection'
-import FormCreateSection from 'src/components/FormSection'
+import FormCreateSection from 'src/components/FormName'
 
-const ModalEditSection = ({
+const ModalEditBoard = ({
   isOpen,
   closeModal,
   data,
@@ -16,7 +16,7 @@ const ModalEditSection = ({
 
   return (
     <SettingsModalsLayout
-      title="Edit section"
+      title="Edit board"
       isOpen={isOpen}
       isLoading={isLoading}
       closeModal={closeModal}
@@ -27,4 +27,4 @@ const ModalEditSection = ({
   )
 }
 
-export default ModalEditSection
+export default ModalEditBoard
