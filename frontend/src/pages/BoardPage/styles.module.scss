@@ -1,7 +1,19 @@
 .container {
   @apply flex
     flex-col
-    gap-y-7;
+    gap-y-2.5;
+
+  & > h2 {
+    @apply text-gray-300
+      text-2xl
+      overflow-hidden 
+      whitespace-nowrap
+      text-ellipsis;
+
+    @media screen and (max-width: 576px) {
+      @apply text-base;
+    }
+  }
 }
 
 .boardList {

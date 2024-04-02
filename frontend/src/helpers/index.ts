@@ -1,10 +1,7 @@
-import { createAction } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
 import { badToast } from 'src/lib/toastify'
 
 import type { ActionReducerMapBuilder, AsyncThunk } from '@reduxjs/toolkit'
 import type { InitialStateT } from 'src/redux/features/task-slice'
-import type { AppDispatch } from 'src/redux/store'
 
 export const addAsyncHandlers = (
   builder: ActionReducerMapBuilder<any>,
@@ -16,7 +13,7 @@ export const addAsyncHandlers = (
         state.isLoading = true
       })
       .addCase(action.rejected, (state: InitialStateT) => {
-        badToast('Something bad happened :(')
+        badToast('Something bad happened :p')
         state.isLoading = false
       })
   })

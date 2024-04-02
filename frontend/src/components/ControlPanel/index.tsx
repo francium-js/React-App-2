@@ -44,7 +44,7 @@ const ControlPanel = (): JSX.Element => {
             onOpen({ name: Modals.CREATE_NEW_SECTION })
           }}
         >
-          Create new list
+          New Section
         </Button>
       </div>
     </div>

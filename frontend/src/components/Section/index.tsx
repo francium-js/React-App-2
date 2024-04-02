@@ -20,7 +20,7 @@ const Section = ({ sectionId, name, refBoard }: SectionProps): JSX.Element => {
   } = useSection({ sectionId, name, refBoard })
 
   return (
-    <div className={s.container} style={{ width: boardWidth }}>
+    <li className={s.container} style={{ minWidth: boardWidth }}>
       <div className={s.header}>
         <h3>{name}</h3>
         <div className={s.headerSetting}>
@@ -44,7 +44,7 @@ const Section = ({ sectionId, name, refBoard }: SectionProps): JSX.Element => {
           ))}
         </ul>
       </Skeleton>
-    </div>
+    </li>
   )
 }
 
