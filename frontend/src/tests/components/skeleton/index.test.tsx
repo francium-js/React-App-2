@@ -2,12 +2,12 @@ import { render } from '@testing-library/react'
 import Skeleton from 'src/components/Skeleton'
 
 describe('Skeleton Component', () => {
-  // it('renders loading skeleton when isLoading is true', () => {
-  //   const { container } = render(
-  //     <Skeleton isLoading={true} dataLength={0}></Skeleton>,
-  //   )
-  //   expect(container.querySelectorAll('#skeleton').length).toBe(1)
-  // })
+  it('renders loading skeleton when isLoading is true', () => {
+    const { container } = render(
+      <Skeleton isLoading={true} dataLength={0}></Skeleton>,
+    )
+    expect(container.querySelectorAll('#skeleton').length).toBe(1)
+  })
   // it('renders children when isLoading is false and dataLength is greater than 0', () => {
   //   const { container } = render(
   //     <Skeleton isLoading={false} dataLength={1}>
