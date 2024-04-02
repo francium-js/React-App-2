@@ -19,7 +19,7 @@ export class SectionController {
   @Post()
   @ApiOperation({ summary: 'Create new section' })
   @ApiResponse({
-    status: 200,
+    status: 201,
     type: PostSectionResponseDto,
   })
   async create(

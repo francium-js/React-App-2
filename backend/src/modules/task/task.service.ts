@@ -2,14 +2,14 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { Section } from 'src/entities/section.entity'
-import { Task } from 'src/entities/task.entity'
+import { Section } from '../../entities/section.entity'
+import { Task } from '../../entities/task.entity'
 
 import { HistoryService } from '../history/history.service'
 
-import { giveArrayChangedProps } from 'src/shared/helpers/giveArrayChangedProps'
+import { giveArrayChangedParams } from '../../shared/helpers/giveArrayChangedParams'
 
-import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch-dto'
+import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch.dto'
 import { PostTaskDto, PostTaskResponseDto } from './dtos/post.dto'
 import { GetTaskIdResponseDto } from './dtos/get-id.dto'
 
@@ -28,7 +28,6 @@ export class TaskService {
       where: { id },
       relations: ['tasks', 'tasks.section'],
     })
-
     if (!section) {
       throw new HttpException(`Section with ${id} not found`, HttpStatus.NOT_FOUND)
     }
@@ -48,11 +47,12 @@ export class TaskService {
         HttpStatus.NOT_FOUND,
       )
     }
+    console.error('hello')
 
     const createdTask = this.taskRepository.create({
       ...props,
       status: section.name,
-      section,
+      section: { id: section.id, name: section.name },
     })
 
     const task = await this.taskRepository.save(createdTask)
@@ -86,7 +86,7 @@ export class TaskService {
       throw new HttpException(`Task with id ${id} not found`, HttpStatus.NOT_FOUND)
     }
 
-    const text = giveArrayChangedProps(task, { ...rest, status: section.name })
+    const text = giveArrayChangedParams(task, { ...rest, status: section.name })
     await this.historyService.createHistory({
       board: section.board,
       task,

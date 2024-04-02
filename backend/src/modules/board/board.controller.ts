@@ -19,7 +19,7 @@ export class BoardController {
   @Get()
   @ApiOperation({ summary: 'Get all boards' })
   @ApiResponse({
-    status: 200,
+    status: 201,
     type: [GetBoardResponseDto],
   })
   async get(): Promise<GetBoardResponseDto[]> {

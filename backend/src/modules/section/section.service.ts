@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { Section } from 'src/entities/section.entity'
-import { Board } from 'src/entities/board.entity'
+import { Section } from '../../entities/section.entity'
+import { Board } from '../../entities/board.entity'
 
 import { HistoryService } from '../history/history.service'
 

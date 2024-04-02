@@ -2,6 +2,8 @@ import { IsIn, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator'
 import { Optional } from '@nestjs/common'
 import { ApiProperty } from '@nestjs/swagger'
 
+import { Section } from '../../../entities/section.entity'
+
 export class PatchTaskBodyDto {
   @IsNotEmpty()
   @IsString()
@@ -16,27 +18,27 @@ export class PatchTaskBodyDto {
   sectionId: string
 
   @IsNotEmpty()
-  @IsString()
   @Optional()
+  @IsString()
   @ApiProperty({ example: 'Create user layout', required: false })
   title: string
 
   @IsNotEmpty()
-  @IsNumber()
   @Optional()
+  @IsNumber()
   @ApiProperty({ example: 1711485506688, required: false })
   dueDate: number
 
   @IsNotEmpty()
-  @IsString()
   @Optional()
+  @IsString()
   @IsIn(['Low', 'Medium', 'High'])
   @ApiProperty({ example: 'Medium', required: false })
   priority: string
 
   @IsNotEmpty()
-  @IsString()
   @Optional()
+  @IsString()
   @ApiProperty({
     example:
       'Task description should be unambuguration accurate, factual, comprehensible.',
@@ -63,4 +65,7 @@ export class PatchTaskResponseDto {
 
   @ApiProperty({ example: 'Low' })
   priority: string
+
+  @ApiProperty({ type: Section })
+  section: Section
 }

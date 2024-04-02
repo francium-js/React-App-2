@@ -2,9 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { History } from 'src/entities/history.entity'
-import { Board } from 'src/entities/board.entity'
-import { Task } from 'src/entities/task.entity'
+import { History } from '../../entities/history.entity'
+import { Board } from '../../entities/board.entity'
+import { Task } from '../../entities/task.entity'
 
 import { GetHistoryResponseDto } from './dtos/get.dto'
 import { GetHistoryIdResponseDto } from './dtos/get-id.dto'

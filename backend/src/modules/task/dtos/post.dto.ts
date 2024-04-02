@@ -1,5 +1,6 @@
 import { IsIn, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { Section } from '../../../entities/section.entity'
 
 export class PostTaskDto {
   @IsNotEmpty()
@@ -51,4 +52,7 @@ export class PostTaskResponseDto {
 
   @ApiProperty({ example: 'Low' })
   priority: string
+
+  @ApiProperty({ type: Section })
+  section: Section
 }

@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { SectionModule } from 'src/modules/section/section.module'
-import { TaskModule } from 'src/modules/task/task.module'
+import { SectionModule } from './modules/section/section.module'
+import { TaskModule } from './modules/task/task.module'
 import { HistoryModule } from './modules/history/history.module'
 import { BoardModule } from './modules/board/board.module'
 

@@ -6,10 +6,10 @@ import { HistoryService } from '../history/history.service'
 
 import { SectionController } from './section.controller'
 
-import { Section } from 'src/entities/section.entity'
-import { History } from 'src/entities/history.entity'
-import { Board } from 'src/entities/board.entity'
-import { Task } from 'src/entities/task.entity'
+import { Section } from '../../entities/section.entity'
+import { History } from '../../entities/history.entity'
+import { Board } from '../../entities/board.entity'
+import { Task } from '../../entities/task.entity'
 
 @Module({
   imports: [TypeOrmModule.forFeature([Section, History, Board, Task])],

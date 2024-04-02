@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { Board } from 'src/entities/board.entity'
+import { Board } from '../../entities/board.entity'
 import { GetBoardResponseDto } from './dtos/get.dto'
 import { PostBoardResponseDto } from './dtos/post.dto'
 
