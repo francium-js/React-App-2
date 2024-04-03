@@ -1,1 +1,0 @@
-{"version":3,"file":"responses.js","sourceRoot":"","sources":["../../../src/e2e/board/responses.ts"],"names":[],"mappings":";;AAEA,MAAM,SAAS,GAAG;IAChB,GAAG,EAAE,CAAC,IAA2B,EAAE,OAAe,EAAuB,EAAE;QACzE,OAAO,IAAI,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CAAC,IAAI,CAAC,EAAE,KAAK,OAAO,CAAC,CAAA;IAC/C,CAAC;CACF,CAAA;AAED,kBAAe,SAAS,CAAA"}
