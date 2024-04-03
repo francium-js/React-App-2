@@ -1,5 +1,5 @@
-export type UseEditorFormSwitcher = {
-  isEditor: boolean | undefined
+export type EditorFormSwitcherProps = {
+  isEditor?: boolean
   isLoading: boolean
   isDirty: boolean
   onConfirm: () => void

@@ -1,4 +1,4 @@
-export const FETCH_URL = import.meta.env.VITE_URL_BY_BACKEND
+export const FETCH_URL = 'http://localhost:8080/'
 
 export enum FetchEndpoint {
   BOARD = '/board',

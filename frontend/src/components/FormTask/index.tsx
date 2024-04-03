@@ -22,7 +22,7 @@ const FormTask = ({
   const { statusArray } = useFormTask()
 
   return (
-    <div className={s.container} {...props}>
+    <div className={s.container} {...props} data-testid="editorOn">
       <Controller
         control={control}
         name="title"

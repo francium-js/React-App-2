@@ -36,7 +36,7 @@ const ModalTaskInfo = ({
       Button={<></>}
     >
       <div className={s.container}>
-        <div className={s.taskForm_Wrapper}>
+        <div data-testid="ModalTaskInfo" className={s.taskForm_Wrapper}>
           {isEditor ? (
             <FormTask errors={errors} control={control} />
           ) : (

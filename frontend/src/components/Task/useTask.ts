@@ -17,17 +17,10 @@ export const useTask = (data: TaskProps) => {
     dispatch(taskService.remove(data.id))
   }
 
-  const openModalEditTask = () => {
+  const openModalEditTask = (isEdit: boolean) => {
     onOpen({
       name: Modals.TASK_INFO,
-      data: { ...data, openedit: true },
-    })
-  }
-
-  const openInfoTaskModal = () => {
-    onOpen({
-      name: Modals.TASK_INFO,
-      data,
+      data: { isEdit, ...data },
     })
   }
 
@@ -39,7 +32,6 @@ export const useTask = (data: TaskProps) => {
 
   return {
     onOpen,
-    openInfoTaskModal,
     openModalEditTask,
     deleteTask,
     priorityColors,

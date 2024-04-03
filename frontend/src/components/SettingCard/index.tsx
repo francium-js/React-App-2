@@ -33,7 +33,7 @@ const SettingCard = ({ onEdit, onDelete, onAdd }: SettingCardProps): JSX.Element
         <button
           type="button"
           onClick={() => {
-            onEdit()
+            onEdit(true)
             setVanish(!vanish)
           }}
         >

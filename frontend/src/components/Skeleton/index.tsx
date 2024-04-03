@@ -17,7 +17,7 @@ const Skeleton = ({
 }: SkeletonProps): ReactNode | JSX.Element => {
   if (isLoading) {
     return (
-      <div id="#skeleton" {...props}>
+      <div data-testid="skeleton" {...props}>
         {Array.from({ length: skeletonLength }).map((_, i) => (
           <div className={s.loadingContainer} key={i}>
             <VscLoading className={s.loading} size={size} />

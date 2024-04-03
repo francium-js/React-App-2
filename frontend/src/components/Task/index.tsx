@@ -12,13 +12,12 @@ import { formatDate, spliceText } from 'src/helpers'
 import s from 'src/components/Task/styles.module.scss'
 
 const Task = (data: TaskProps): JSX.Element => {
-  const { deleteTask, openModalEditTask, openInfoTaskModal, priorityColors } =
-    useTask(data)
+  const { deleteTask, openModalEditTask, priorityColors } = useTask(data)
 
   const { title, description, dueDate, priority } = data
 
   return (
-    <li className={s.container} onClick={openInfoTaskModal}>
+    <li className={s.container} onClick={() => openModalEditTask(false)}>
       <div className={s.settingButtonWrapper}>
         <SettingCard onEdit={openModalEditTask} onDelete={deleteTask} />
       </div>

@@ -2,7 +2,7 @@ import type { ModalDialogProps } from 'src/components/Modals/types'
 import type { TaskT } from 'src/types'
 
 export type UseModalTaskInfoProps = {
-  openedit?: boolean
+  isEdit: boolean
 } & TaskT
 
 export type ModalTaskInfoProps = {

@@ -1,7 +1,7 @@
 import { GiConfirmed } from 'react-icons/gi'
 import { FiEdit } from 'react-icons/fi'
 
-import type { UseEditorFormSwitcher } from 'src/components/EditorFormSwitcher/types'
+import type { EditorFormSwitcherProps } from 'src/components/EditorFormSwitcher/types'
 
 import s from 'src/components/EditorFormSwitcher/styles.module.scss'
 
@@ -11,13 +11,16 @@ const EditorFormSwitcher = ({
   isDirty,
   onConfirm,
   toogle,
-}: UseEditorFormSwitcher): JSX.Element => {
+}: EditorFormSwitcherProps): JSX.Element => {
+  const bgColor = !isDirty || isLoading ? 'red' : 'green'
+
   return (
     <div className={s.editButton_Wrapper}>
       {isEditor ? (
         <button
+          data-testid="buttonConfirm"
           style={{
-            backgroundColor: !isDirty || isLoading ? '#f32d2d' : '#3bdf43',
+            backgroundColor: bgColor,
           }}
           disabled={isLoading}
           onClick={onConfirm}
@@ -25,7 +28,7 @@ const EditorFormSwitcher = ({
           <GiConfirmed size={30} />
         </button>
       ) : (
-        <button onClick={() => toogle(true)}>
+        <button data-testid="buttonEdit" onClick={() => toogle(true)}>
           <FiEdit size={30} />
         </button>
       )}
