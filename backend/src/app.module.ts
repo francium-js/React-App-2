@@ -14,7 +14,7 @@ import { BoardModule } from 'src/modules/board/board.module'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        url: configService.get('POSTGRES_URL'),
+        url: configService.get('POSTGRES_VERCEL_URL'),
         synchronize: true,
         entities: [__dirname + '/**/**.entity{.ts,.js}'],
       }),
