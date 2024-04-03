@@ -10,8 +10,7 @@
     "lint:format": "prettier --write ./src --log-level silent",
     "lint:fix": "eslint --fix --cache ./src --max-warnings=0 --color",
     "lint:pre-commit": "lint-staged",
-    "preview": "vite preview",
-    "test": "jest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
