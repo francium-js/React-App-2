@@ -17,7 +17,7 @@ const Task = (data: TaskProps): JSX.Element => {
   const { title, description, dueDate, priority } = data
 
   return (
-    <li className={s.container} onClick={() => openModalEditTask(true)}>
+    <li className={s.container} onClick={() => openModalEditTask(false)}>
       <div className={s.settingButtonWrapper}>
         <SettingCard onEdit={openModalEditTask} onDelete={deleteTask} />
       </div>
