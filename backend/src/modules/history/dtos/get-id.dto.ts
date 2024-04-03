@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
-import { Section } from '../../../entities/section.entity'
-import { Board } from '../../../entities/board.entity'
-import { Task } from '../../../entities/task.entity'
+import { Section } from 'src/entities/section.entity'
+import { Board } from 'src/entities/board.entity'
+import { Task } from 'src/entities/task.entity'
 
 export class GetHistoryIdParamsDto {
   @IsNotEmpty()

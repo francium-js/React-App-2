@@ -2,12 +2,12 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { Section } from '../../entities/section.entity'
-import { Task } from '../../entities/task.entity'
+import { Section } from 'src/entities/section.entity'
+import { Task } from 'src/entities/task.entity'
 
-import { HistoryService } from '../history/history.service'
+import { HistoryService } from 'src/modules/history/history.service'
 
-import { giveArrayChangedParams } from '../../shared/helpers/giveArrayChangedParams'
+import { giveArrayChangedParams } from 'src/shared/helpers/giveArrayChangedParams'
 
 import { PatchTaskBodyDto, PatchTaskResponseDto } from './dtos/patch.dto'
 import { PostTaskDto, PostTaskResponseDto } from './dtos/post.dto'
