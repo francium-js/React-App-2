@@ -18,7 +18,7 @@ import taskService from 'src/redux/services/task-operations'
 import { schema } from 'src/components/Modals/ModalTaskInfo/validationSchema'
 
 export const useModalTaskInfo = (data: UseModalTaskInfoProps) => {
-  const [isEditor, useIsEditor] = useState(data.openedit)
+  const [isEditor, useIsEditor] = useState(data.isEdit)
   const { onClose } = useModals()
 
   const dispatch = useDispatch<AppDispatch>()
