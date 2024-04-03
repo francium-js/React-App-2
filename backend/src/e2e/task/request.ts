@@ -1,7 +1,7 @@
 import { PostTaskDto } from '../../modules/task/dtos/post.dto'
 import { PatchTaskBodyDto } from '../../modules/task/dtos/patch.dto'
 
-const taskRequest = {
+const requests = {
   post: (sectionId: string): PostTaskDto => {
     return {
       sectionId,
@@ -24,4 +24,4 @@ const taskRequest = {
   },
 }
 
-export default taskRequest
+export default requests

@@ -14,7 +14,7 @@ export class BoardService {
   ) {}
 
   async get(): Promise<GetBoardResponseDto[]> {
-    return this.boardRepository.find({ relations: ['sections'] })
+    return this.boardRepository.find()
   }
 
   async create(name: string): Promise<PostBoardResponseDto> {

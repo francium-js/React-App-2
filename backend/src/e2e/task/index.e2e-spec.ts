@@ -4,8 +4,8 @@ import { Test } from '@nestjs/testing'
 
 import { AppModule } from '../../app.module'
 
-import taskResponses from './task.responses'
-import taskRequest from './task.request'
+import responses from './responses'
+import requests from './request'
 
 import { Board } from '../../entities/board.entity'
 import { Section } from '../../entities/section.entity'
@@ -40,9 +40,9 @@ describe('TaskController', () => {
   it('/task (POST)', async () => {
     const { statusCode, body } = await request(app.getHttpServer())
       .post('/task')
-      .send(taskRequest.post(section.id))
+      .send(requests.post(section.id))
     expect(statusCode).toBe(201)
-    expect(body).toEqual(taskResponses.post(body))
+    expect(body).toEqual(responses.post(body))
 
     task = body
   })
@@ -50,9 +50,9 @@ describe('TaskController', () => {
   it('/task (PATCH)', async () => {
     const { statusCode, body } = await request(app.getHttpServer())
       .patch('/task')
-      .send(taskRequest.patch(task.id, section.id))
+      .send(requests.patch(task.id, section.id))
     expect(statusCode).toBe(200)
-    expect(body).toEqual(taskResponses.patch(body))
+    expect(body).toEqual(responses.patch(body))
 
     task = body
   })
@@ -62,7 +62,7 @@ describe('TaskController', () => {
       `/task/${section.id}`,
     )
     expect(statusCode).toBe(200)
-    expect(body).toEqual(taskResponses.getBySectionId(body))
+    expect(responses.getBySectionId(body, task.id)).toEqual(task)
   })
 
   it('/task/:id (DELETE)', async () => {
@@ -75,11 +75,14 @@ describe('TaskController', () => {
 
   it('Did throw Error if Task not found', async () => {
     await request(app.getHttpServer()).get(`/task/${section.id}`).expect(404)
-    await request(app.getHttpServer()).post('/task').expect(404)
     await request(app.getHttpServer()).delete(`/task/${task.id}`).expect(404)
     await request(app.getHttpServer())
+      .post('/task')
+      .send(requests.post(section.id))
+      .expect(404)
+    await request(app.getHttpServer())
       .patch('/task')
-      .send(taskRequest.patch(task.id, section.id))
+      .send(requests.patch(task.id, section.id))
       .expect(404)
   })
 })

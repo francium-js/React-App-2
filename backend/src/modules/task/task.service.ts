@@ -47,7 +47,6 @@ export class TaskService {
         HttpStatus.NOT_FOUND,
       )
     }
-    console.error('hello')
 
     const createdTask = this.taskRepository.create({
       ...props,

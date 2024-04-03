@@ -2,7 +2,7 @@ import { PostTaskResponseDto } from '../../modules/task/dtos/post.dto'
 import { PatchTaskResponseDto } from '../../modules/task/dtos/patch.dto'
 import { GetTaskIdResponseDto } from '../../modules/task/dtos/get-id.dto'
 
-const taskResponses = {
+const responses = {
   post: ({ id, status, section }: PostTaskResponseDto) => {
     return {
       id,
@@ -25,13 +25,12 @@ const taskResponses = {
       section,
     }
   },
-  getBySectionId: (data: GetTaskIdResponseDto[]) => {
-    return data.map(
-      ({ id, status, title, description, dueDate, priority, section }) => {
-        return { id, status, title, description, dueDate, priority, section }
-      },
-    )
+  getBySectionId: (
+    data: GetTaskIdResponseDto[],
+    taskId: string,
+  ): GetTaskIdResponseDto => {
+    return data.find(item => item.id === taskId)
   },
 }
 
-export default taskResponses
+export default responses
