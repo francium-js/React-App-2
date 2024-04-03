@@ -14,11 +14,7 @@ import { BoardModule } from 'src/modules/board/board.module'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('POSTGRES_URL'),
-        port: configService.get('POSTGRES_PORT'),
-        username: configService.get('POSTGRES_USER'),
-        password: configService.get('POSTGRES_PASSWORD'),
-        database: configService.get('POSTGRES_DB'),
+        url: configService.get('POSTGRES_URL'),
         synchronize: true,
         entities: [__dirname + '/**/**.entity{.ts,.js}'],
       }),
