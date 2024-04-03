@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 dist
+db
 dist-ssr
 *.local
 
@@ -26,7 +27,7 @@ dist-ssr
 # compiled output
 /dist
 /node_modules
-/build
+db
 
 # Logs
 logs
@@ -61,7 +62,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # dotenv environment variable files
-.env
 .env.development.local
 .env.test.local
 .env.production.local
