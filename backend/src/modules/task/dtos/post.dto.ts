@@ -1,6 +1,7 @@
 import { IsIn, IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { Section } from '../../../entities/section.entity'
+
+import { Section } from 'src/entities/section.entity'
 
 export class PostTaskDto {
   @IsNotEmpty()

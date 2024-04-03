@@ -1,5 +1,5 @@
-import { PostTaskDto } from '../../modules/task/dtos/post.dto'
-import { PatchTaskBodyDto } from '../../modules/task/dtos/patch.dto'
+import { PostTaskDto } from 'src/modules/task/dtos/post.dto'
+import { PatchTaskBodyDto } from 'src/modules/task/dtos/patch.dto'
 
 const requests = {
   post: (sectionId: string): PostTaskDto => {

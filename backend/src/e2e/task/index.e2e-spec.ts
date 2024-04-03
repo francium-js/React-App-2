@@ -2,14 +2,14 @@ import { INestApplication } from '@nestjs/common'
 import { agent as request } from 'supertest'
 import { Test } from '@nestjs/testing'
 
-import { AppModule } from '../../app.module'
+import { AppModule } from 'src/app.module'
 
 import responses from './responses'
 import requests from './request'
 
-import { Board } from '../../entities/board.entity'
-import { Section } from '../../entities/section.entity'
-import { Task } from '../../entities/task.entity'
+import { Board } from 'src/entities/board.entity'
+import { Section } from 'src/entities/section.entity'
+import { Task } from 'src/entities/task.entity'
 
 describe('TaskController', () => {
   let app: INestApplication

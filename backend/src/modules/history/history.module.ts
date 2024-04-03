@@ -5,9 +5,9 @@ import { HistoryController } from './history.controller'
 
 import { HistoryService } from './history.service'
 
-import { History } from '../../entities/history.entity'
-import { Task } from '../../entities/task.entity'
-import { Board } from '../../entities/board.entity'
+import { History } from 'src/entities/history.entity'
+import { Task } from 'src/entities/task.entity'
+import { Board } from 'src/entities/board.entity'
 
 @Module({
   imports: [TypeOrmModule.forFeature([History, Task, Board])],

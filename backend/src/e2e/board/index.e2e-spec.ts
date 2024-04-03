@@ -4,7 +4,7 @@ import { Test } from '@nestjs/testing'
 
 import responses from './responses'
 
-import { AppModule } from '../../app.module'
+import { AppModule } from 'src/app.module'
 import { Board } from 'src/entities/board.entity'
 
 describe('BoardController', () => {

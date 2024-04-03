@@ -1,6 +1,6 @@
-import { PostTaskResponseDto } from '../../modules/task/dtos/post.dto'
-import { PatchTaskResponseDto } from '../../modules/task/dtos/patch.dto'
-import { GetTaskIdResponseDto } from '../../modules/task/dtos/get-id.dto'
+import { PostTaskResponseDto } from 'src/modules/task/dtos/post.dto'
+import { PatchTaskResponseDto } from 'src/modules/task/dtos/patch.dto'
+import { GetTaskIdResponseDto } from 'src/modules/task/dtos/get-id.dto'
 
 const responses = {
   post: ({ id, status, section }: PostTaskResponseDto) => {
