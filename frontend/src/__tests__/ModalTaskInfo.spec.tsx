@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -34,7 +33,6 @@ const CallModalTaskInfo = () => {
 const App = (): JSX.Element => {
   return (
     <Provider store={store}>
-      <ToastContainer />
       <ModalProvider>
         <CallModalTaskInfo />
       </ModalProvider>
