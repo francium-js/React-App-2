@@ -3,6 +3,9 @@ import Skeleton from 'src/components/Skeleton'
 import type { Meta } from '@storybook/react'
 import type { SkeletonProps } from 'src/components/Skeleton/types'
 
+import 'src/App.css'
+import 'src/index.css'
+
 const meta: Meta<typeof Skeleton> = {
   title: 'Skeleton',
   component: Skeleton,

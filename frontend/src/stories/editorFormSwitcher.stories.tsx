@@ -2,6 +2,9 @@ import EditorFormSwitcher from 'src/components/EditorFormSwitcher'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
+import 'src/App.css'
+import 'src/index.css'
+
 const meta: Meta<typeof EditorFormSwitcher> = {
   title: 'EditorFormSwitcher',
   component: EditorFormSwitcher,
