@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { ValidationPipe } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -7,10 +6,9 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  const config = app.get(ConfigService)
 
   app.enableCors({
-    origin: [config.get('CLIENT_URL'), 'http://localhost:3001'],
+    origin: '*',
     credentials: true,
   })
 
