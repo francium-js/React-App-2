@@ -50,9 +50,7 @@
 }
 
 .skeleton {
-  @apply flex 
-  gap-2.5
-  flex-col
+  @apply gap-2.5
   overflow-y-auto;
 
   & > div {

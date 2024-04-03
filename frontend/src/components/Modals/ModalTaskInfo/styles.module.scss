@@ -12,6 +12,12 @@
 
 .taskForm_Wrapper {
   @apply relative;
+
+  & > div:last-child {
+    @apply absolute
+    top-0
+    right-0;
+  }
 }
 
 .historyContainer {
@@ -45,9 +51,7 @@
 }
 
 .skeleton {
-  @apply flex
-  flex-col
-  px-2
+  @apply px-2
   w-80
   gap-4;
 

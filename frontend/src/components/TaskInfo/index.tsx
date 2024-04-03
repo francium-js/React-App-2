@@ -13,10 +13,9 @@ const TaskInfo = ({
   dueDate,
   priority,
   status,
-  ...props
 }: TaskInfoProps): JSX.Element => {
   return (
-    <div className={s.container} {...props}>
+    <div className={s.container}>
       <h2>{title}</h2>
       <div className={s.paramsWrapper}>
         <ul className={s.paramKey}>

@@ -1,7 +1,7 @@
 import { GiConfirmed } from 'react-icons/gi'
 import { FiEdit } from 'react-icons/fi'
 
-import type { UseEditorFormSwitcher } from 'src/components/EditorFormSwitcher/types'
+import type { EditorFormSwitcherProps } from 'src/components/EditorFormSwitcher/types'
 
 import s from 'src/components/EditorFormSwitcher/styles.module.scss'
 
@@ -11,7 +11,7 @@ const EditorFormSwitcher = ({
   isDirty,
   onConfirm,
   toogle,
-}: UseEditorFormSwitcher): JSX.Element => {
+}: EditorFormSwitcherProps): JSX.Element => {
   return (
     <div className={s.editButton_Wrapper}>
       {isEditor ? (

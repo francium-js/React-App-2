@@ -1,8 +1,4 @@
 .editButton_Wrapper {
-  @apply absolute
-    top-0
-    right-0;
-
   & > button {
     @apply flex
         rounded-md
