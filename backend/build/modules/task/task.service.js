@@ -68,7 +68,6 @@ let TaskService = class TaskService {
             if (!section) {
                 throw new common_1.HttpException(`Section with id ${sectionId} not found`, common_1.HttpStatus.NOT_FOUND);
             }
-            console.error('hello');
             const createdTask = this.taskRepository.create(Object.assign(Object.assign({}, props), { status: section.name, section: { id: section.id, name: section.name } }));
             const task = yield this.taskRepository.save(createdTask);
             yield this.historyService.createHistory({

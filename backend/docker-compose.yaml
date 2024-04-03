@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: postgres-MyTaskBoard
+    image: postgres:16-alpine
+    env_file: .env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - '${POSTGRES_PORT}:5432'
