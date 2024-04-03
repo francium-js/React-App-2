@@ -10,7 +10,7 @@ yarn test - юніт тести
 
 yarn test:e2e - тести контроллерів
 
-P.S. НЕ ЗАБУДЬТЕ "yarn install" !!!
+P.S. НЕ ЗАБУДЬТЕ про "yarn install" для jest !!!
 
 ![image](https://github.com/zalvladik/React-App-2/assets/117291886/6b550c56-cd05-42f7-b5a0-5c586e68dbc4)
 ![image](https://github.com/zalvladik/React-App-2/assets/117291886/788cc808-a036-4b2f-8115-833346c6962a)
